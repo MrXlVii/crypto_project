@@ -34,4 +34,7 @@ Target:
 # Bitwise XOR is ^ in python
 
 #TODO: XOR the ciphers, discover the many-time pad
+  # E(A) XOR E(B) == A XOR B 
+  # Works when they're same length, if longer, message is truncated.
+  # we're working to recover the MTP
 #TODO: decode final cipher
