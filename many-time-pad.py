@@ -4,8 +4,6 @@ Below are eleven hex-encoded ciphertexts that are the result of encrypting eleve
 Your goal is to decrypt the last ciphertext, and submit the secret message within it as solution.
 Hint: XOR the ciphertexts together, and consider what happens when a space is XORed with a character in [a-zA-Z].
 '''
-import sys
-import getopt
 
 def main(): 
   
