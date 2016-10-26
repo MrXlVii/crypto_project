@@ -5,8 +5,6 @@ Your goal is to decrypt the last ciphertext, and submit the secret message withi
 Hint: XOR the ciphertexts together, and consider what happens when a space is XORed with a character in [a-zA-Z].
 '''
 
-def main(): 
-  
 #Declare variables
   cipherOne = "315c4eeaa8b5f8aaf9174145bf43e1784b8fa00dc71d885a804e5ee9fa40b16349c146fb778cdf2d3aff021dfff5b403b510d0d0455468aeb98622b137dae857553ccd8883a7bc37520e06e515d22c954eba5025b8cc57ee59418ce7dc6bc41556bdb36bbca3e8774301fbcaa3b83b220809560987815f65286764703de0f3d524400a19b159610b11ef3e"
 
@@ -42,15 +40,12 @@ def main():
 #TODO: decode final cipher
 
 def XOR(A, B):
-  #Takes in two ciphers and XORs them, then reveals the first cipher's message.
-  bitA = A.decode("hex") 
-  bitB = B.decode("hex")
-
-  return "".join(chr(ord(x) ^ ord(y)) for x, y in zip(bitA, bitB)
-  
-  
-
-if __name__ == "__main__": main()
+  #Takes in two hex ciphers then XORs them, returns in hex
+  if len(A) > len(B):
+        return '%x' % (int(A[:len(B)],16)^int(B,16)) # %x returns in hex format
+    else:
+        return '%x' % (int(A,16)^int(B[:len(A)],16))
+ 
 
 
 
