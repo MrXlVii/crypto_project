@@ -40,12 +40,15 @@ Hint: XOR the ciphertexts together, and consider what happens when a space is XO
 #TODO: decode final cipher
 
 def XOR(A, B):
-  #Takes in two hex ciphers then XORs them, returns in hex
+  #Takes in two hex ciphers then XORs them, returns in hex (A ^ B)
   if len(A) > len(B):
         return '%x' % (int(A[:len(B)],16)^int(B,16)) # %x returns in hex format
     else:
         return '%x' % (int(A,16)^int(B[:len(A)],16))
- 
+      
+
+      
+#TODO: XOR ciphers of similar length to Target, then (T ^ A) XOR A which should reveal Target
 
 
 
