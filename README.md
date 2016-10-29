@@ -1,3 +1,3 @@
 # crytography-project
 
-Not 100% sure what this is yet, going to be crypto practice as of right now, can change at any point
+A repo to practice cryptography and cryptanalysis and to build skills to turn into a side project.
