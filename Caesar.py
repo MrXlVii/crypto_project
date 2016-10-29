@@ -2,22 +2,10 @@
 """
 Demonstration text for program's output:
 
-
-Do you wish to encrypt or decrypt a message?
-
-encrypt
-
-Enter your message:
-
-The sky above the port was the color of television, tuned to a dead channel.
-
-Enter the key number (1-26)
-
-13
-
-Your translated text is:
-
-Gur fxl nobir gur cbeg jnf gur pbybe bs gryrivfvba, gharq gb n qrnq punaary.
+Do you wish to encrypt or decrypt a message?  encrypt
+Enter your message:  The sky above the port was the color of television, tuned to a dead channel.
+Enter the key number (1-26)  13
+Your translated text is:  Gur fxl nobir gur cbeg jnf gur pbybe bs gryrivfvba, gharq gb n qrnq punaary.
 """
 
 
@@ -25,7 +13,6 @@ Gur fxl nobir gur cbeg jnf gur pbybe bs gryrivfvba, gharq gb n qrnq punaary.
 def main():
 
 #TODO: make program cycle for correct input
-
 
 en_de_crypt = raw_input('Do you wish to "encrypt" or "decrypt" a message?')
 inputMessage = raw_input('Enter your message:')
@@ -42,5 +29,14 @@ def crypt(cryptInput):
 		return False
 	else:
 		print 'Write either "encrypt" or "decrypt"'
+
+def encryption(message, size):
+	#TODO: takes in message string and the key size, and runs caesar cipher
+
+def decryption(ciphertext, size):
+	#TODO: takes in the ciphertext and key size, performs reverse caeasar cipher
+
+	
+	
 		
 if __name__ == '__main__': main()
