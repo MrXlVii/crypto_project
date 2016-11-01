@@ -11,7 +11,7 @@ Your translated text is:  Gur fxl nobir gur cbeg jnf gur pbybe bs gryrivfvba, gh
 
 
 def main():
-	#TODO: make program cycle for correct input
+	#TODO: test that program cycles correctly
 	
 	while(True):
 		en_de_crypt = raw_input('Do you wish to "encrypt" or "decrypt" a message?')
@@ -71,7 +71,7 @@ def encryption(plaintext, size):
 	
 
 def decryption(ciphertext, size):
-	#TODO: takes in the ciphertext and key size, performs reverse caeasar cipher
+	#takes in the ciphertext and key size, performs reverse caeasar cipher
 	
 	plaintext = list(ciphertext.copy()) 
 	
