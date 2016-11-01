@@ -30,13 +30,26 @@ def crypt(cryptInput):
 	else:
 		print 'Write either "encrypt" or "decrypt"'
 
-def encryption(message, size):
+def encryption(plaintext, size):
 	#TODO: takes in message string and the key size, and runs caesar cipher
+	
+	cipher = list(plaintext.copy()) 
+	
+	for i in range(len(cipher))
+		cipher[i] = char(ord(cipher[i]) + size)
+	
+	return cipher
+	
 
 def decryption(ciphertext, size):
 	#TODO: takes in the ciphertext and key size, performs reverse caeasar cipher
-
 	
+	plaintext = list(ciphertext.copy()) 
 	
+	for i in range(len(plaintext))
+		plaintext[i] = char(ord(plaintext[i]) - size)
+	
+	return plaintext
+		
 		
 if __name__ == '__main__': main()
