@@ -11,14 +11,43 @@ Your translated text is:  Gur fxl nobir gur cbeg jnf gur pbybe bs gryrivfvba, gh
 
 
 def main():
+	#TODO: make program cycle for correct input
+	
+	while(True):
+		en_de_crypt = raw_input('Do you wish to "encrypt" or "decrypt" a message?')
+		if en_de_crypt is 'encrypt' or 'Encrypt' or 'decrypt' or 'Decrypt':
+			break
+		else:
+			print "you need to write 'encrypt' or 'decrypt'"
+			pass
 
-#TODO: make program cycle for correct input
-
-en_de_crypt = raw_input('Do you wish to "encrypt" or "decrypt" a message?')
-inputMessage = raw_input('Enter your message:')
-keySize = raw_input('Enter the key number (1-26)')
-
-print 'Your translated text is: " + value
+	while(True):
+		inputMessage = raw_input('Enter your message:')
+		if inputMessage is None:
+			print "you need to enter a message"
+			continue
+		else:
+			break
+	
+	while(True):
+		keySize = raw_input('Enter the key number (1-26)')
+		if keySize is None:
+			print "you need to enter a key number"
+			continue
+		elif type(keySize) is int:
+			if keySize > 26 or keySize < 1:
+				print "enter a value between 1 and 26"
+				continue
+			else:
+				break
+		else:
+			print "Enter an integer key number (1-26)"
+			pass
+			
+			
+	#TODO: print 'Your translated text is: " + value
+	
+	
 
 def crypt(cryptInput):
 	#returns boolean value, true if encrypt, false if decrypt
@@ -28,10 +57,10 @@ def crypt(cryptInput):
 	elif en_de_crypt is 'decrypt' or 'Decrypt':
 		return False
 	else:
-		print 'Write either "encrypt" or "decrypt"'
+		#throw exception
 
 def encryption(plaintext, size):
-	#TODO: takes in message string and the key size, and runs caesar cipher
+	#takes in message string and the key size, and runs caesar cipher
 	
 	cipher = list(plaintext.copy()) 
 	
