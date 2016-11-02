@@ -14,7 +14,8 @@ def main():
 	#TODO: test that program cycles correctly
 	
 	while(True):
-		en_de_crypt = raw_input('Do you wish to "encrypt" or "decrypt" a message?')
+		en_de_crypt = raw_input('Do you wish to "encrypt" or "decrypt" a message? ')
+		
 		if en_de_crypt is 'encrypt' or 'Encrypt' or 'decrypt' or 'Decrypt':
 			break
 		else:
@@ -22,7 +23,8 @@ def main():
 			pass
 
 	while(True):
-		inputMessage = raw_input('Enter your message:')
+		inputMessage = raw_input('Enter your message: ')
+		
 		if inputMessage is None:
 			print "you need to enter a message"
 			continue
@@ -30,7 +32,9 @@ def main():
 			break
 	
 	while(True):
-		keySize = raw_input('Enter the key number (1-26)')
+		keySize = raw_input('Enter the key number (1-26): ')
+		keySize = int(keySize) 
+		
 		if keySize is None:
 			print "you need to enter a key number"
 			continue
@@ -44,17 +48,26 @@ def main():
 			print "Enter an integer key number (1-26)"
 			pass
 			
-			
-	#TODO: print 'Your translated text is: " + value
+"""			
+	if crypt(en_de_crypt) is True:
+        cipherText = encryption(inputMessage, keySize)
+        print 'Your translated text is: ' + cipherText
+    elif crypt(en_de_crypt) is False:
+        plainText = decryption(inputMessage, keySize)
+        print 'Your translated text is: ' + plainText
+    else:
+        pass
+        #throw exception
+"""
 	
 	
 
 def crypt(cryptInput):
 	#returns boolean value, true if encrypt, false if decrypt
 
-	if en_de_crypt is 'encrypt' or 'Encrypt':
+	if cryptInput is 'encrypt' or 'Encrypt':
 		return True
-	elif en_de_crypt is 'decrypt' or 'Decrypt':
+	elif cryptInput is 'decrypt' or 'Decrypt':
 		return False
 	else:
 		pass
