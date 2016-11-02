@@ -57,6 +57,7 @@ def crypt(cryptInput):
 	elif en_de_crypt is 'decrypt' or 'Decrypt':
 		return False
 	else:
+		pass
 		#throw exception
 
 def encryption(plaintext, size):
@@ -64,7 +65,7 @@ def encryption(plaintext, size):
 	
 	cipher = list(plaintext.copy()) 
 	
-	for i in range(len(cipher))
+	for i in range(len(cipher)):
 		cipher[i] = char(ord(cipher[i]) + size)
 	
 	return cipher
@@ -75,7 +76,7 @@ def decryption(ciphertext, size):
 	
 	plaintext = list(ciphertext.copy()) 
 	
-	for i in range(len(plaintext))
+	for i in range(len(plaintext)):
 		plaintext[i] = char(ord(plaintext[i]) - size)
 	
 	return plaintext
