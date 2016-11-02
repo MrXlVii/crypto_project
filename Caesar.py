@@ -76,7 +76,7 @@ def crypt(cryptInput):
 def encryption(plaintext, size):
 	#takes in message string and the key size, and runs caesar cipher
 	
-	cipher = list(plaintext.copy()) 
+	cipher = list(plaintext) 
 	
 	for i in range(len(cipher)):
 		cipher[i] = char(ord(cipher[i]) + size)
@@ -87,7 +87,7 @@ def encryption(plaintext, size):
 def decryption(ciphertext, size):
 	#takes in the ciphertext and key size, performs reverse caeasar cipher
 	
-	plaintext = list(ciphertext.copy()) 
+	plaintext = list(ciphertext) 
 	
 	for i in range(len(plaintext)):
 		plaintext[i] = char(ord(plaintext[i]) - size)
