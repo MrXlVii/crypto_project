@@ -1,30 +1,31 @@
 
 """
 Demonstration text for program's output:
-
 Do you wish to encrypt or decrypt a message?  encrypt
 Enter your message:  The sky above the port was the color of television, tuned to a dead channel.
 Enter the key number (1-26)  13
 Your translated text is:  Gur fxl nobir gur cbeg jnf gur pbybe bs gryrivfvba, gharq gb n qrnq punaary.
 """
 
-
+"""
+en_de_crypt = ''
+inputMessage = ''
+keySize = ''
+"""
 
 def main():
 	#TODO: test that program cycles correctly
 	
 	while(True):
 		en_de_crypt = raw_input('Do you wish to "encrypt" or "decrypt" a message? ')
-		
 		if en_de_crypt is 'encrypt' or 'Encrypt' or 'decrypt' or 'Decrypt':
 			break
 		else:
 			print "you need to write 'encrypt' or 'decrypt'"
-			pass
+			continue
 
 	while(True):
 		inputMessage = raw_input('Enter your message: ')
-		
 		if inputMessage is None:
 			print "you need to enter a message"
 			continue
@@ -33,8 +34,7 @@ def main():
 	
 	while(True):
 		keySize = raw_input('Enter the key number (1-26): ')
-		keySize = int(keySize) 
-		
+		keySize = int(keySize)
 		if keySize is None:
 			print "you need to enter a key number"
 			continue
@@ -43,25 +43,23 @@ def main():
 				print "enter a value between 1 and 26"
 				continue
 			else:
-				break
+			    logic = crypt(en_de_crypt)
+			    break
+
 		else:
 			print "Enter an integer key number (1-26)"
 			pass
 			
-"""			
-	if crypt(en_de_crypt) is True:
-        cipherText = encryption(inputMessage, keySize)
-        print 'Your translated text is: ' + cipherText
-    elif crypt(en_de_crypt) is False:
-        plainText = decryption(inputMessage, keySize)
-        print 'Your translated text is: ' + plainText
-    else:
-        pass
+	if logic is True:
+	    cipher= encryption(inputMessage, keySize)
+	    print cipher
+	elif logic is False:
+	    plain= decryption(inputMessage, keySize)
+	    print plain
+	else:
+	    pass
         #throw exception
-"""
-	
-	
-
+              
 def crypt(cryptInput):
 	#returns boolean value, true if encrypt, false if decrypt
 
@@ -79,9 +77,11 @@ def encryption(plaintext, size):
 	cipher = list(plaintext) 
 	
 	for i in range(len(cipher)):
-		cipher[i] = char(ord(cipher[i]) + size)
+		cipher[i] = chr(ord(cipher[i]) + size)
 	
-	return cipher
+	output= ''.join(cipher)
+	
+	return output
 	
 
 def decryption(ciphertext, size):
@@ -90,9 +90,12 @@ def decryption(ciphertext, size):
 	plaintext = list(ciphertext) 
 	
 	for i in range(len(plaintext)):
-		plaintext[i] = char(ord(plaintext[i]) - size)
+		plaintext[i] = chr(ord(plaintext[i]) - size)
 	
-	return plaintext
+	output= ''.join(plaintext)	
+	
+	return output
 		
 		
-if __name__ == '__main__': main()
+if __name__ == '__main__': 
+    main()
