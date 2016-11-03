@@ -7,12 +7,6 @@ Enter the key number (1-26)  13
 Your translated text is:  Gur fxl nobir gur cbeg jnf gur pbybe bs gryrivfvba, gharq gb n qrnq punaary.
 """
 
-"""
-en_de_crypt = ''
-inputMessage = ''
-keySize = ''
-"""
-
 def main():
 	#TODO: test that program cycles correctly
 	
