@@ -1,5 +1,5 @@
 import unittest
-import Caesar.py
+import Caesar
 
 class TestCryptMethods(unittest.TestCase):
     """Tests for Caesar.py"""
@@ -7,9 +7,12 @@ class TestCryptMethods(unittest.TestCase):
     encryptInput = ['foo', 'bar', 'Hello World', '345', '101010111']
     
     def setUp(self):
+        pass
     def test_crypt(self):
-        for i in range(len(cryptInput)):
-            result[i] = Caesar.crypt(cryptInput[i])
+        result = []
+        
+        for i in range(len(self.cryptInput)):
+            result.append(Caesar.crypt(self.cryptInput[i]))
         self.assertTrue(result[0])
         self.assertTrue(result[1])
         self.assertFalse(result[2])
@@ -17,12 +20,15 @@ class TestCryptMethods(unittest.TestCase):
         #self.assertRaises
         #self.assertRaises
         
+    """    
     def test_encryption(self):
         for i in range(len(encryptInput)):
             result[i] = Caesar.crypt(encryptInput[i])
+    """
         
         
     def test_decryption(self):
+        pass
 
 if __name__ == "__main__":
     unittest.main()    
