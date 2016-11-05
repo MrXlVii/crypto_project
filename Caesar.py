@@ -12,8 +12,8 @@ def main():
 	
 	while(True):
 		en_de_crypt = raw_input('Do you wish to "encrypt" or "decrypt" a message? ')
-		if en_de_crypt is 'encrypt' or 'Encrypt' or 'decrypt' or 'Decrypt':
-			break
+		if (en_de_crypt == 'encrypt') or (en_de_crypt =='Encrypt') or (en_de_crypt =='decrypt') or (en_de_crypt =='Decrypt'):
+		    break
 		else:
 			print "you need to write 'encrypt' or 'decrypt'"
 			continue
@@ -56,11 +56,15 @@ def main():
               
 def crypt(cryptInput):
 	#returns boolean value, true if encrypt, false if decrypt
-
-	if cryptInput is 'encrypt' or 'Encrypt':
-		return True
-	elif cryptInput is 'decrypt' or 'Decrypt':
-		return False
+	
+	truth = False
+	
+	if (cryptInput == 'encrypt') or (cryptInput =='Encrypt'):
+	    truth = True
+	    return truth
+	elif (cryptInput == 'decrypt') or (cryptInput =='Decrypt'):
+	    truth = False
+	    return truth
 	else:
 		pass
 		#throw exception

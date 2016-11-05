@@ -4,7 +4,8 @@ import Caesar
 class TestCryptMethods(unittest.TestCase):
     """Tests for Caesar.py"""
     cryptInput = ['encrypt', 'Encrypt', 'decrypt', 'Decrypt', 'blah', 'WHOCARES']
-    encryptInput = ['foo', 'bar', 'Hello World', '345', '101010111']
+    encryptInput = ['foo', 'bar', 'Hello World', '342', '101010111']
+    decryptInput = ['ktt', 'gfw', 'Mjqqt%\twqi', '897', '656565666']
     
     def setUp(self):
         pass
@@ -20,11 +21,10 @@ class TestCryptMethods(unittest.TestCase):
         #self.assertRaises
         #self.assertRaises
         
-    """    
     def test_encryption(self):
         for i in range(len(encryptInput)):
             result[i] = Caesar.crypt(encryptInput[i])
-    """
+  
         
         
     def test_decryption(self):
