@@ -8,7 +8,6 @@ Your translated text is:  Gur fxl nobir gur cbeg jnf gur pbybe bs gryrivfvba, gh
 """
 
 def main():
-	#TODO: test that program cycles correctly
 	
 	while(True):
 		en_de_crypt = raw_input('Do you wish to "encrypt" or "decrypt" a message? ')
@@ -71,6 +70,8 @@ def crypt(cryptInput):
 
 def encryption(plaintext, size):
 	#takes in message string and the key size, and runs caesar cipher
+	#TODO: keeps spaces as spaces
+	#TODO: only phase shifts within the 26 letter alphabet
 	
 	cipher = list(plaintext) 
 	
@@ -84,6 +85,8 @@ def encryption(plaintext, size):
 
 def decryption(ciphertext, size):
 	#takes in the ciphertext and key size, performs reverse caeasar cipher
+	#TODO: keeps spaces as spaces
+	#TODO: only shifts within 26 letter alphabet
 	
 	plaintext = list(ciphertext) 
 	
