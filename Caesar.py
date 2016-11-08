@@ -70,13 +70,34 @@ def crypt(cryptInput):
 
 def encryption(plaintext, size):
 	#takes in message string and the key size, and runs caesar cipher
-	#TODO: keeps spaces as spaces
-	#TODO: only phase shifts within the 26 letter alphabet
-	
+		
 	cipher = list(plaintext) 
 	
 	for i in range(len(cipher)):
-		cipher[i] = chr(ord(cipher[i]) + size)
+		cipher[i] = ord(cipher[i])
+		
+		if cipher[i] is 32:
+		    cipher[i] = chr(cipher[i])
+		elif cipher[i] > 64 and cipher[i] < 91:
+		    temp = cipher[i] + size
+		    if temp >= 91:
+		        temp -= 90
+		        temp += 64
+		        cipher[i] = chr(temp)
+		    else:
+		        cipher[i] = chr(temp)    
+		    
+		elif cipher[i] > 96 and cipher[i] < 123:
+		    temp = cipher[i] + size
+		    if temp >= 123:
+		        temp -= 122
+		        temp += 96
+		        cipher[i] = chr(temp)
+		    else:
+		        cipher[i] = chr(temp)
+		 
+		else:
+		    cipher[i] = chr(cipher[i])
 	
 	output= ''.join(cipher)
 	
@@ -85,15 +106,34 @@ def encryption(plaintext, size):
 
 def decryption(ciphertext, size):
 	#takes in the ciphertext and key size, performs reverse caeasar cipher
-	#TODO: keeps spaces as spaces
-	#TODO: only shifts within 26 letter alphabet
 	
-	plaintext = list(ciphertext) 
+	plain = list(ciphertext) 
 	
-	for i in range(len(plaintext)):
-		plaintext[i] = chr(ord(plaintext[i]) - size)
+	for i in range(len(plain)):
+		plain[i] = ord(plain[i])
+		
+		if plain[i] is 32:
+		    plain[i] = chr(plain[i])
+		elif plain[i] > 64 and plain[i] < 91:
+		    temp = plain[i] - size
+		    if temp <= 64:
+		        temp += 26
+		        plain[i] = chr(temp)
+		    else:
+		        plain[i] = chr(temp)    
+		    
+		elif plain[i] > 96 and plain[i] < 123:
+		    temp = plain[i] - size
+		    if temp <= 96:
+		        temp += 26
+		        plain[i] = chr(temp)
+		    else:
+		        plain[i] = chr(temp)
+		 
+		else:
+		    plain[i] = chr(plain[i])
 	
-	output= ''.join(plaintext)	
+	output= ''.join(plain)
 	
 	return output
 		
