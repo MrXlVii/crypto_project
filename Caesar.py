@@ -51,7 +51,6 @@ def main():
 	    print plain
 	else:
 	    pass
-        #throw exception
               
 def crypt(cryptInput):
 	#returns boolean value, true if encrypt, false if decrypt
@@ -66,7 +65,6 @@ def crypt(cryptInput):
 	    return truth
 	else:
 		pass
-		#throw exception
 
 def encryption(plaintext, size):
 	#takes in message string and the key size, and runs caesar cipher
