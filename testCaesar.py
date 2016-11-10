@@ -7,8 +7,6 @@ class TestCryptMethods(unittest.TestCase):
     encryptInput = ['foo', 'bar', 'Hello World', 'xyz', '101010111']
     decryptInput = ['ktt', 'gfw', 'Mjqqt Btwqi', 'cde', '101010111']
     
-    def setUp(self):
-        pass
     def test_crypt(self):
         result = []
         
@@ -22,11 +20,11 @@ class TestCryptMethods(unittest.TestCase):
         #self.assertRaises
         
     def test_encryption(self):
-        for i in range(len(encryptInput)):
-            result.append(Caesar.encryption(self.encryptInput[i]))
-    
-    #TODO: test encryption runs appropriately
-  
+        result = []
+        
+        for i in range(len(self.encryptInput)):
+            result.append(Caesar.encryption(self.encryptInput[i], 5))
+            self.assertEqual(result[i], self.decryptInput[i])
         
         
     def test_decryption(self):
