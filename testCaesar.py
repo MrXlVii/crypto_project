@@ -28,7 +28,11 @@ class TestCryptMethods(unittest.TestCase):
         
         
     def test_decryption(self):
-        pass
+        result = []
+        
+        for i in range(len(self.decryptInput)):
+            result.append(Caesar.decryption(self.decryptInput[i], 5))
+            self.assertEqual(result[i], self.encryptInput[i])
     
     #TODO: test decryption runs appropriately
 
