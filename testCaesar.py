@@ -3,7 +3,7 @@ import Caesar
 
 class TestCryptMethods(unittest.TestCase):
     """Tests for Caesar.py"""
-    cryptInput = ['encrypt', 'Encrypt', 'decrypt', 'Decrypt', 'blah', 'WHOCARES']
+    cryptInput = ['encrypt', 'Encrypt', 'decrypt', 'Decrypt']
     encryptInput = ['foo', 'bar', 'Hello World', 'xyz', '101010111']
     decryptInput = ['ktt', 'gfw', 'Mjqqt Btwqi', 'cde', '101010111']
     
@@ -16,8 +16,6 @@ class TestCryptMethods(unittest.TestCase):
         self.assertTrue(result[1])
         self.assertFalse(result[2])
         self.assertFalse(result[3])
-        #self.assertRaises
-        #self.assertRaises
         
     def test_encryption(self):
         result = []
