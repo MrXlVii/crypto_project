@@ -3,7 +3,7 @@ Rotor class for Enigma Machine
 
 """
 
-class Rotor
+class Rotor:
     'Basic Rotor class for Enigma Machine'
     rotorNum = 0
 
