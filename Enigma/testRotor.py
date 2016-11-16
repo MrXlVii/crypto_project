@@ -1,30 +1,27 @@
 
 import unittest
-import Rotor
+from Rotor import Rotor
 
 
 class testRotor(unittest.TestCase):
      #test for Rotor.py
-
-     #TODO: fix " 'module' object not callable on line 15
      
      c1= ['A', 'B', 'C']
      c2= ['D', 'E', 'F']
-     c3= [3]
+     c3= []
      
      def test_Instance(self):
          R1 = Rotor(self.c1)
-         R2 = Rotor(self.c2)
-         R3 = Rotor(self.c3)
-         
          self.assertEqual(R1.rotorNum, 1)
+         R2 = Rotor(self.c2)
          self.assertEqual(R2.rotorNum, 2)
+         R3 = Rotor(self.c3)
          self.assertEqual(R2.rotorNum, 3)
          
-         for i in 100:
+         for i in range(4,100):
              R = Rotor(self.c1)
              
-         self.assertEqual(R.rotorNum, 103)
+         self.assertEqual(R.rotorNum, 99)
          
          print R1.config
          self.assertEqual(R1.config, self.c1)
