@@ -7,8 +7,8 @@ class Rotor:
     'Basic Rotor class for Enigma Machine'
     rotorNum = 0
 
-    def __init__(self, config):
-        self.config = config
+    def __init__(self, configuration):
+        self.config = configuration
         self.POSITION = 0
         Rotor.rotorNum += 1
         
