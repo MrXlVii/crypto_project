@@ -18,9 +18,5 @@ class Rotor:
         
     def setStart(self, position):
         #Takes starting position from 0 to n on the Rotor
-        self.POSITION = position
-        
-    def displayPosition(self):
-        #returns the value at current Rotor position'
-        return self.config[self.POSITION] 
+        self.POSITION = position 
     
