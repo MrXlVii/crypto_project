@@ -1,5 +1,3 @@
-#TODO: handle R(1,2,3) are not global variables error due to setUp()/tearDown()
-
 
 import unittest
 from Rotor import Rotor
