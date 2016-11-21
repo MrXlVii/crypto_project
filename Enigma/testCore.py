@@ -7,7 +7,7 @@ This is the test for Core.py
 import unittest
 from Core import Core
 
-def class testCore:
+def class testCore(unittest.TestCase):
     
     def test_Build_Rotors(self):
         pass
