@@ -14,7 +14,11 @@ class Rotor:
         
     def rotate(self):
         #Increments the current Rotor position
-        self.POSITION += 1
+        if len(self.config) > 1:
+            self.POSITION += 1
+        else:
+            print "the rotor is not large enough to rotate"
+            pass
         
     def setStart(self, position):
         #Takes starting position from 0 to n on the Rotor
