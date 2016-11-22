@@ -1,3 +1,4 @@
+# TODO: update to accommodate for new linked list implementation
 
 import unittest
 from Rotor import Rotor
