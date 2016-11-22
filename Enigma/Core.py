@@ -1,22 +1,29 @@
+"""
 
+The housing for the Rotors, functions as a doubly linked list
+
+"""
 
 def class Core:
-    """Logic core for Enigma Machine, corresponding to the circuitry"""
+
+    head= None
+    tail= None
     
-    def buildRotors():
-        #rotor configuration/build
+    def append(self, data):
+        newRotor = Rotor(data, None, None)
+        
+        if self.head is None:
+            self.head = self.tail = newRotor
+        else:
+            newRotor.prev = self.tail
+            newRotor.next = None
+            self.tail.next = newRotor
+            self.tail = newRotor
+          
+    def remove(self, value):  
+        pass
+    
+    def show(self):  
         pass
         
-    def arrangeRotors():
-        #arranges the order of each individual rotor
-        pass
-    
-    def encrypt():
-        #performs the encryption logic
-        pass
-        
-    def decrypt():
-        #performs teh decryption logic
-        pass
-    
     
