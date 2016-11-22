@@ -9,17 +9,14 @@ from Core import Core
 
 def class testCore(unittest.TestCase):
     
-    def test_Build_Rotors(self):
+    def test_Append(self):
         pass
     
-    def test_Arrange_Rotors(self):
-        pass
-        
-    def test_Encrypt(self):
-        pass
-        
-    def test_Decrypt(self):
+    def test_Remove(self):
         pass
     
+    def test_Show(self):
+        pass
+        
 if __name__ == "__main__":
     unittest.main()
