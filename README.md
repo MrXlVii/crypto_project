@@ -14,6 +14,9 @@ Projects:
         - OOP working model of the Engima machine used in WW2.
         - Three Rotor Encryption Scheme:
             - i.e. each rotor has a different configuration of characters, the user picks starting position on rotor and one of six rotor configurations (for three)
+  
+**UPDATE: Restructuring the project for better organization, putting Rotor and Core objects into a singular module, below is subject to flux
+
         FILES:
             1. Rotor.py
                 -Unit test: testRotor
