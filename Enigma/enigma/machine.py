@@ -1,18 +1,9 @@
-"""
-Rotor class for Enigma Machine
-functions as Node in doubly linked list
-"""
-
-class Rotor():
+class Rotor(object):
     """Basic Rotor class for Enigma Machine"""
     rotorNum = 0
 
-    def __init__(self, data, prev, next):
-        self.data = data    #the contents of each rotor
-        self.next = next    #the next Rotor in sequence
-        self.prev = prev    #previous Rotor in sequence--for decryption
+    def __init__(self, data):
         self.POSITION = 0   #current position on Rotor
-        Rotor.rotorNum += 1 #TODO: fix this bug
         
     def rotate(self):
         #Increments the current Rotor position. All calls to "data" are data[POSITION]
@@ -30,33 +21,40 @@ class Rotor():
         
 #---------------------------------------------------------------------------------------------
 
-"""
-The housing for the Rotors, functions as a doubly linked list
-"""
+def class Core(object):
 
-def class Core():
-
-    head= None
-    tail= None
-    
-    def append(self, data):
-        newRotor = Rotor(data, None, None)
+    def config(self, first, second, third, p1, p2, p3):
+        #TODO: plan optimum way to parse the rotor config
+        pass
         
-        if self.head is None:
-            self.head = self.tail = newRotor
-        else:
-            newRotor.prev = self.tail
-            newRotor.next = None
-            self.tail.next = newRotor
-            self.tail = newRotor
-          
-    def remove(self, value):  
+    def encrypt(self, plain):
+        #TODO: implement
         pass
     
-    def show(self):  
+    def decrypt(self, cipher):
+        #TODO: implement
         pass
+    
 
 
 #-------------------------------------------------------------------------------------------
 
+"""
+This is initialization for the rotor objects
 
+This is the letter arrange from the 1930 Enigma I
+
+"""
+
+R1 = Rotor([E, K, M, F, L, G, D, Q, V, Z, N, T, O, W, Y, H, X, U, S, P, A, I, B, R, C, J])
+R2 = Rotor([A, J, D, K, S, I, R, U, X, B, L, H, W, T, M, C, Q, G, Z, N, P, Y, F, V, O, E])
+R3 = Rotor([B, D, F, H, J, L, C, P, R, T, X, V, Z, N, Y, E, I, W, G, A, K, M, U, S, Q, O]) 	
+
+#-------------------------------------------------------------------------------------------
+def main():
+    pass
+
+
+if __name__ == "__main___":
+    main()
+ssag
