@@ -22,10 +22,22 @@ class Rotor(object):
 #---------------------------------------------------------------------------------------------
 
 def class Core(object):
+    
+    def __init__(self, first, second, third):
+        self.r1 = first
+        self.r2 = second
+        self.r3 = third
 
     def config(self, first, second, third, p1, p2, p3):
-        #TODO: plan optimum way to parse the rotor config
-        pass
+        #sets the current rotor configuration and positions of each respective rotor
+        
+        self.r1 = first
+        self.r2 = second
+        self.r3 = third
+        
+        r1.setStart(p1)
+        r2.setStart(p2)
+        r3.setStart(p3)
         
     def encrypt(self, plain):
         #TODO: implement
