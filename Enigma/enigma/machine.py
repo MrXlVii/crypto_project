@@ -40,12 +40,71 @@ def class Core(object):
         r3.setStart(p3)
         
     def encrypt(self, plain):
-        #TODO: implement
-        pass
-    
+        #TODO: alter this code from Caesar.py to account for the Rotor addition.
+        cipher = list(plaintext) 
+	
+	    for i in range(len(cipher)):
+		    cipher[i] = ord(cipher[i])
+		
+		    if cipher[i] is 32:
+		        cipher[i] = chr(cipher[i])
+		    elif cipher[i] > 64 and cipher[i] < 91:
+		        temp = cipher[i] + size
+		        if temp >= 91:
+		            temp -= 90
+		            temp += 64
+		            cipher[i] = chr(temp)
+		        else:
+		            cipher[i] = chr(temp)    
+		    
+		    elif cipher[i] > 96 and cipher[i] < 123:
+		        temp = cipher[i] + size
+		        if temp >= 123:
+		            temp -= 122
+		            temp += 96
+		            cipher[i] = chr(temp)
+		        else:
+		            cipher[i] = chr(temp)
+		 
+		    else:
+		        cipher[i] = chr(cipher[i])
+	
+	    output= ''.join(cipher)
+	
+	return output
+	
     def decrypt(self, cipher):
-        #TODO: implement
-        pass
+        #TODO: alter code from Caesar.py to accommodate for enigma machine
+        
+        plain = list(ciphertext) 
+	
+	    for i in range(len(plain)):
+		    plain[i] = ord(plain[i])
+		
+        if plain[i] is 32:
+		    plain[i] = chr(plain[i])
+		elif plain[i] > 64 and plain[i] < 91:
+		    temp = plain[i] - size
+		    if temp <= 64:
+		        temp += 26
+		        plain[i] = chr(temp)
+		    else:
+		        plain[i] = chr(temp)    
+		    
+		elif plain[i] > 96 and plain[i] < 123:
+		    temp = plain[i] - size
+		    if temp <= 96:
+		        temp += 26
+		        plain[i] = chr(temp)
+		    else:
+		        plain[i] = chr(temp)
+		 
+		else:
+		    plain[i] = chr(plain[i])
+	
+	    output= ''.join(plain)
+	
+	    return output
     
 
 
