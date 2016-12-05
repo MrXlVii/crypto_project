@@ -41,7 +41,7 @@ def class Core(object):
         
     def encrypt(self, plain):
         #TODO: alter this code from Caesar.py to account for the Rotor addition.
-        cipher = list(plaintext) 
+        cipher = list(plain) 
 	
 	    for i in range(len(cipher)):
 		    cipher[i] = ord(cipher[i])
@@ -49,7 +49,8 @@ def class Core(object):
 		    if cipher[i] is 32:
 		        cipher[i] = chr(cipher[i])
 		    elif cipher[i] > 64 and cipher[i] < 91:
-		        temp = cipher[i] + size
+		        temp = (cipher[i] + ord(r1[POSITION]) + ord(r2[POSITION]) + ord(r3[POSITION])) % 65 
+		        #flag here for potential math error
 		        if temp >= 91:
 		            temp -= 90
 		            temp += 64
@@ -58,7 +59,8 @@ def class Core(object):
 		            cipher[i] = chr(temp)    
 		    
 		    elif cipher[i] > 96 and cipher[i] < 123:
-		        temp = cipher[i] + size
+		        temp = (cipher[i] + ord(r1[POSITION]) + ord(r2[POSITION]) + ord(r3[POSITION])) % 96
+		        #flag for potential math error
 		        if temp >= 123:
 		            temp -= 122
 		            temp += 96
