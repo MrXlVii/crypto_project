@@ -18,18 +18,21 @@ Projects:
 **UPDATE: Restructuring the project for better organization, putting Rotor and Core objects into a singular module, below is subject to flux
 
         FILES:
-            1. Rotor.py
-                -Unit test: testRotor
-                -Methods:
-                    a. rotate() - moves the Rotor one position
-                    b. setStart() - sets the starting position for each rotor
-            2. Core.py
-                -Central hub for the logic of the Enigma Machine, in charge of encrypt/decrypt as well as rotor settings
-                -Methods:
-                    a. buildRotor() - adds rotor with appropriate rotor configuration
-                    b. arrageRotors() - arrages the order of the individual Rotors
-                    c. encrypt() - runs the encryption process
-                    d. decrypt() - runs decryption process
+            1. Machine.py
+                -Primary module, contains all of the following classes
+                *Rotor.py*
+                    -Methods:
+                        a. init(self, data) - constructor
+                        b. rotate(self) - moves the Rotor one position
+                        c. setStart(self, position) - sets the starting position for each rotor
+                *Core.py*
+                    -Central hub for the logic of the Enigma Machine, in charge of encrypt/decrypt as well as rotor settings
+                    -Methods:
+                        a. init(self, first, second, third) -- constructor takes in three Rotors for initialization
+                        b. config(self, first, second, third, p1, p2, p3) 
+                            -arrages the order of the individual Rotors and their positions
+                        c. encrypt(self, plain) - runs the encryption process
+                        d. decrypt(self, cipher) - runs decryption process
 
         
         
