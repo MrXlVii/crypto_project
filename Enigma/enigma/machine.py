@@ -49,7 +49,7 @@ def class Core(object):
 		    if cipher[i] is 32:
 		        cipher[i] = chr(cipher[i])
 		    elif cipher[i] > 64 and cipher[i] < 91:
-		        temp = (cipher[i] + ord(r1[POSITION]) + ord(r2[POSITION]) + ord(r3[POSITION])) % 65 
+		        temp = (cipher[i] + ord(r1[POSITION]) + ord(r2[POSITION]) + ord(r3[POSITION])) % 64 
 		        #flag here for potential math error
 		        if temp >= 91:
 		            temp -= 90
@@ -86,7 +86,8 @@ def class Core(object):
         if plain[i] is 32:
 		    plain[i] = chr(plain[i])
 		elif plain[i] > 64 and plain[i] < 91:
-		    temp = plain[i] - size
+		    temp = (plain[i] - ord(r1[POSITION]) - ord(r2[POSITION]) - ord(r3[POSITION])) % 64
+		    #Flagged for potential modulo error
 		    if temp <= 64:
 		        temp += 26
 		        plain[i] = chr(temp)
@@ -94,7 +95,8 @@ def class Core(object):
 		        plain[i] = chr(temp)    
 		    
 		elif plain[i] > 96 and plain[i] < 123:
-		    temp = plain[i] - size
+		    temp = (plain[i] - ord(r1[POSITION]) - ord(r2[POSITION]) - ord(r3[POSITION])) % 96
+		    #Flagged for potential modulo error
 		    if temp <= 96:
 		        temp += 26
 		        plain[i] = chr(temp)
@@ -130,4 +132,3 @@ def main():
 
 if __name__ == "__main___":
     main()
-ssag
