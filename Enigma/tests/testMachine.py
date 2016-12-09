@@ -42,6 +42,7 @@ class TestRotorMethods(unittest.TestCase):
          
         for i in range(0,100):
             R2.rotate()
+            
         self.assertEqual(R2.POSITION, 100)
         
         #TODO: Determine how we'd like to handle modulo positions 
@@ -69,8 +70,20 @@ class TestCoreMethods(unittest.TestCase):
     #Test for Core object
     
     def test_Config(self):
-        pass
-    
+        R1 = Rotor(self.c1)
+        R2 = Rotor(self.c2)
+        R3 = Rotor(self.c3) 
+        
+        Core.config(R1, R2, R3, 2, 1, 0)
+        assertEqual(Core.r1[POSITION], 'C', 'failed to assign first rotor')
+        assertEqual(Core.r2[POSITION], 'E', 'failed to assign second rotor')
+        assertEqual(Core.r3[POSITION], 'G', 'failed to assign third rotor')
+        
+        Core.config(R3, R1, R2, 0, 0, 0)
+        assertEqual(Core.r1[POSITION], 'G', 'failed rotor reassignment')
+        assertEqual(Core.r2[POSITION], 'A', 'failed rotor reassignment')
+        assertEqual(Core.r3[POSITION], 'D', 'failed rotor reassignment')
+             
     def test_Encrypt(self):
         pass
     
