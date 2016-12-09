@@ -1,5 +1,4 @@
 import unittest
-from enigma import machine
 
 class TestRotorMethods(unittest.TestCase):
     #Test for Rotor object
