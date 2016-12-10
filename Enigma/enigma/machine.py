@@ -21,7 +21,7 @@ class Rotor(object):
         
 #---------------------------------------------------------------------------------------------
 
-def class Core(object):
+class Core(object):
     
     def __init__(self, first, second, third):
         self.r1 = first
@@ -41,9 +41,9 @@ def class Core(object):
         
     def encrypt(self, plain):
         #TODO: alter this code from Caesar.py to account for the Rotor addition.
-        cipher = list(plain) 
-	
-	    for i in range(len(cipher)):
+        cipher = list(plain)
+        
+        for i in range(len(cipher)):
 		    cipher[i] = ord(cipher[i])
 		
 		    if cipher[i] is 32:
@@ -70,11 +70,10 @@ def class Core(object):
 		 
 		    else:
 		        cipher[i] = chr(cipher[i])
-	
-	    output= ''.join(cipher)
-	
-	return output
-	
+		        
+		output = ''.join(cipher)
+		return output
+		
     def decrypt(self, cipher):
         #TODO: alter code from Caesar.py to accommodate for enigma machine
         
