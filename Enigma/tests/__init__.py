@@ -1,5 +1,0 @@
-"""
-
-test suite initialization
-
-"""
