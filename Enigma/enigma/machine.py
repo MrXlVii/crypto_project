@@ -1,13 +1,15 @@
 class Rotor(object):
     """Basic Rotor class for Enigma Machine"""
-    rotorNum = 0
 
     def __init__(self, data):
+        self.data = data
         self.POSITION = 0   #current position on Rotor
+        self.current = self.data[self.POSITION] #returns data at current Rotor position
+
+
         
     def rotate(self):
-        #Increments the current Rotor position. All calls to "data" are data[POSITION]
-        if len(self.config) > 1:
+        if len(self.data) > 1:
             self.POSITION += 1
             
         else:
@@ -16,7 +18,8 @@ class Rotor(object):
         
     def setStart(self, position):
         #Takes starting position from 0 to n on the Rotor
-        self.POSITION = position 
+        #TODO: figure out why self.current isn't updating with updated position
+        self.POSITION = position
         
         
 #---------------------------------------------------------------------------------------------
@@ -35,12 +38,14 @@ class Core(object):
         self.r2 = second
         self.r3 = third
         
-        r1.setStart(p1)
-        r2.setStart(p2)
-        r3.setStart(p3)
+        self.r1.setStart(p1)
+        self.r2.setStart(p2)
+        self.r3.setStart(p3)
         
     def encrypt(self, plain):
-        #TODO: alter this code from Caesar.py to account for the Rotor addition.
+        #TODO: make the nth rotor rotor modulo the n+1th
+        #TODO: work out the modulo math
+
         cipher = list(plain)
                 
         for i in range(len(cipher)):
@@ -49,7 +54,7 @@ class Core(object):
             if cipher[i] is 32:
 		        cipher[i] = chr(cipher[i])
             elif cipher[i] > 64 and cipher[i] < 91:
-                temp = (cipher[i] + ord(r1[POSITION]) + ord(r2[POSITION]) + ord(r3[POSITION])) % 64 
+                temp = (cipher[i] + ord(r1.current) + ord(r2.current) + ord(r3.current)) % 64 
 		        #flag here for potential math error
                 if temp >= 91:
                     temp -= 90
@@ -59,7 +64,7 @@ class Core(object):
                     cipher[i] = chr(temp)
 
             elif cipher[i] > 96 and cipher[i] < 123:
-                temp = (cipher[i] + ord(r1[POSITION]) + ord(r2[POSITION]) + ord(r3[POSITION])) % 96
+                temp = (cipher[i] + ord(r1.current) + ord(r2.current) + ord(r3.current)) % 96
                 #flag for potential math error
                 if temp >= 123:
                     temp -= 122
@@ -75,7 +80,8 @@ class Core(object):
         return output
         
     def decrypt(self, cipher):
-        #TODO: alter code from Caesar.py to accommodate for enigma machine
+        #TODO: make the n-1th Rotor rotate modulo the nth
+        #TODO: work out the modulo math
         
         plain = list(ciphertext)
         
@@ -85,7 +91,7 @@ class Core(object):
         if plain[i] is 32:
             plain[i] = chr(plain[i])
         elif plain[i] > 64 and plain[i] < 91:
-            temp = (plain[i] - ord(r1[POSITION]) - ord(r2[POSITION]) - ord(r3[POSITION])) % 64
+            temp = (plain[i] - ord(r1.current) - ord(r2.current) - ord(r3.current)) % 64
             #Flagged for potential modulo error
             if temp <= 64:
                 temp += 26
@@ -94,7 +100,7 @@ class Core(object):
                 plain[i] = chr(temp)
 
         elif plain[i] > 96 and plain[i] < 123:
-            temp = (plain[i] - ord(r1[POSITION]) - ord(r2[POSITION]) - ord(r3[POSITION])) % 96
+            temp = (plain[i] - ord(r1.current) - ord(r2.current) - ord(r3.current)) % 96
             #Flagged for potential modulo error
             if temp <= 96:
                 temp += 26
@@ -125,6 +131,7 @@ R3 = Rotor(['B', 'D', 'F', 'H', 'J', 'L', 'C', 'P', 'R', 'T', 'X', 'V', 'Z', 'N'
 
 #-------------------------------------------------------------------------------------------
 def main():
+    #TODO: write main method
     pass
 
 
