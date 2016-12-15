@@ -21,12 +21,12 @@ class TestRotorMethods(unittest.TestCase):
              
         self.assertEqual(R.rotorNum, 99)
          
-        print R1.config
-        self.assertEqual(R1.config, self.c1, 'failed to install correct rotor config')
-        print R2.config
-        self.assertEqual(R2.config, self.c2, 'failed to install correct rotor config')
-        print R3.config
-        self.assertEqual(R3.config, self.c3, 'failed to install correct rotor config')
+        print R1.data
+        self.assertEqual(R1.data, self.c1, 'failed to install correct rotor config')
+        print R2.data
+        self.assertEqual(R2.data, self.c2, 'failed to install correct rotor config')
+        print R3.data
+        self.assertEqual(R3.data, self.c3, 'failed to install correct rotor config')
     
     def test_Rotate(self):
         R1 = Rotor(self.c1)
@@ -68,21 +68,43 @@ class TestRotorMethods(unittest.TestCase):
 
 class TestCoreMethods(unittest.TestCase):
     #Test for Core object
+
+    c1= ['A', 'B', 'C']
+    c2= ['D', 'E', 'F']
+    c3= ['G']
+
+
+    def test_Init(self):
+        R1 = Rotor(self.c1)
+        R2 = Rotor(self.c2)
+        R3 = Rotor(self.c3)
+
+        coreImpl = Core(R1, R2, R3)
+        
+        self.assertEqual(coreImpl.r1.data, self.c1)
+        self.assertEqual(coreImpl.r2.data, self.c2)
+        self.assertEqual(coreImpl.r3.data, self.c3)
     
     def test_Config(self):
         R1 = Rotor(self.c1)
         R2 = Rotor(self.c2)
-        R3 = Rotor(self.c3) 
+        R3 = Rotor(self.c3)
+
+        core = Core(R1, R2, R3) 
         
-        Core.config(R1, R2, R3, 2, 1, 0)
-        assertEqual(Core.r1[POSITION], 'C', 'failed to assign first rotor')
-        assertEqual(Core.r2[POSITION], 'E', 'failed to assign second rotor')
-        assertEqual(Core.r3[POSITION], 'G', 'failed to assign third rotor')
+        core.config(R1, R2, R3, 2, 1, 0)
+        print core.r1.current
+        print core.r2.current
+        print core.r3.current
+
+        self.assertEqual(core.r1.current, 'C', 'failed to assign first rotor')
+        self.assertEqual(core.r2.current, 'E', 'failed to assign second rotor')
+        self.assertEqual(core.r3.current, 'G', 'failed to assign third rotor')
         
-        Core.config(R3, R1, R2, 0, 0, 0)
-        assertEqual(Core.r1[POSITION], 'G', 'failed rotor reassignment')
-        assertEqual(Core.r2[POSITION], 'A', 'failed rotor reassignment')
-        assertEqual(Core.r3[POSITION], 'D', 'failed rotor reassignment')
+        core.config(R3, R1, R2, 0, 0, 0)
+        self.assertEqual(core.r1.current, 'G', 'failed rotor reassignment')
+        self.assertEqual(core.r2.current, 'A', 'failed rotor reassignment')
+        self.assertEqual(core.r3.current, 'D', 'failed rotor reassignment')
              
     def test_Encrypt(self):
         pass
