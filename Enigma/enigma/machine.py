@@ -4,9 +4,16 @@ class Rotor(object):
     def __init__(self, data):
         self.data = data
         self.POSITION = 0   #current position on Rotor
-        self.current = self.data[self.POSITION] #returns data at current Rotor position
 
+#HAVENT RUN TESTS ON NEW PROPERTY ADDITIONS
 
+    @property
+    def current(self):
+        return self.current
+
+    @current.setter
+    def current(self, position):
+        self.current = self.data[self.POSITION] 
         
     def rotate(self):
         if len(self.data) > 1:
@@ -20,6 +27,7 @@ class Rotor(object):
         #Takes starting position from 0 to n on the Rotor
         #TODO: figure out why self.current isn't updating with updated position
         self.POSITION = position
+        self.current = 
         
         
 #---------------------------------------------------------------------------------------------

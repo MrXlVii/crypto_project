@@ -10,24 +10,23 @@ class TestRotorMethods(unittest.TestCase):
     
     def test_Init(self):
         R1 = Rotor(self.c1)
-        self.assertEqual(R1.rotorNum, 1)
         R2 = Rotor(self.c2)
-        self.assertEqual(R2.rotorNum, 2)
         R3 = Rotor(self.c3)
-        self.assertEqual(R2.rotorNum, 3)
-         
-        for i in range(4,100):
-           R = Rotor(self.c1)
-             
-        self.assertEqual(R.rotorNum, 99)
-         
+
         print R1.data
         self.assertEqual(R1.data, self.c1, 'failed to install correct rotor config')
         print R2.data
         self.assertEqual(R2.data, self.c2, 'failed to install correct rotor config')
         print R3.data
         self.assertEqual(R3.data, self.c3, 'failed to install correct rotor config')
-    
+
+        print R1.current
+        self.assertEqual(R1.current, self.c1[0])
+        print R2.current
+        self.assertEqual(R2.current, self.c2[0])
+        print R3.current
+        self.assertEqual(R3.current, self.c3[0])
+
     def test_Rotate(self):
         R1 = Rotor(self.c1)
         R2 = Rotor(self.c2)
