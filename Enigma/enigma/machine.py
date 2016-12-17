@@ -27,7 +27,6 @@ class Rotor(object):
         #Takes starting position from 0 to n on the Rotor
         #TODO: figure out why self.current isn't updating with updated position
         self.POSITION = position
-        self.current = 
         
         
 #---------------------------------------------------------------------------------------------
@@ -51,16 +50,18 @@ class Core(object):
         self.r3.setStart(p3)
         
     def encrypt(self, plain):
-        #TODO: make the nth rotor rotor modulo the n+1th
         #TODO: work out the modulo math
 
         cipher = list(plain)
+        tick = 0
                 
         for i in range(len(cipher)):
             cipher[i] = ord(cipher[i])
 
             if cipher[i] is 32:
 		        cipher[i] = chr(cipher[i])
+                self.iterate(True)
+
             elif cipher[i] > 64 and cipher[i] < 91:
                 temp = (cipher[i] + ord(r1.current) + ord(r2.current) + ord(r3.current)) % 64 
 		        #flag here for potential math error
@@ -70,6 +71,7 @@ class Core(object):
                     cipher[i] = chr(temp)
                 else:
                     cipher[i] = chr(temp)
+                self.iterate(True)
 
             elif cipher[i] > 96 and cipher[i] < 123:
                 temp = (cipher[i] + ord(r1.current) + ord(r2.current) + ord(r3.current)) % 96
@@ -81,14 +83,16 @@ class Core(object):
                 else:
                     cipher[i] = chr(temp)
 
+                self.iterate(True)
+
             else:
                 cipher[i] = chr(cipher[i])
+                self.iterate(True)
 
         output = ''.join(cipher)
         return output
         
     def decrypt(self, cipher):
-        #TODO: make the n-1th Rotor rotate modulo the nth
         #TODO: work out the modulo math
         
         plain = list(ciphertext)
@@ -122,7 +126,16 @@ class Core(object):
         output= ''.join(plain)
         return output
     
-
+    def iterate(self, logic):
+        if logic is True:
+        #TODO: make the nth Rotor rotate modulo the n+1th
+            pass
+        elif logic is False:
+        #TODO: make the n-1th Rotor rotate modulo the nth
+            pass
+        else:
+        #TODO: throw an exception
+            pass
 
 #-------------------------------------------------------------------------------------------
 
