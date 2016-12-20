@@ -36,17 +36,17 @@ class TestRotorMethods(unittest.TestCase):
         R2.setStart(0)
         R3.setStart(0)
          
-        R1.rotate()
-        self.assertEqual(R1.POSITION, 1)
+        R1.rotate(False)
+        self.assertEqual(R1.POSITION, 2)
          
         for i in range(0,100):
-            R2.rotate()
+            R2.rotate(True)
             
-        self.assertEqual(R2.POSITION, 100)
+        self.assertEqual(R2.POSITION, 0)
         
         #TODO: Determine how we'd like to handle modulo positions 
-        R3.rotate()
-        self.assertEqual(R3.POSITION, 0, 'should not rotate, there is only one value')
+        R3.rotate(False)
+        self.assertEqual(R3.POSITION, 0, 'It should rotate and remain 0')
     
     def test_SetStart(self):
         R1 = Rotor(self.c1)
