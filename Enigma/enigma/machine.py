@@ -15,14 +15,23 @@ class Rotor(object):
     def current(self, position):
         self.current = self.data[self.POSITION] 
         
-    def rotate(self):
-        if len(self.data) > 1:
-            self.POSITION += 1
-            
+    def rotate(self, logic):
+        if logic is True:
+            if len(self.data) != None:
+                self.POSITION += 1
+                if self.POSITON == len(self.data):
+                    self.POSITION = 0            
+            else:
+                print "There is no Rotor object to rotate"
+        elif logic is False:
+            if len(self.data) != None:
+                self.POSITION -=1
+                if self.POSITION < 0:
+                   self.POSITON = len(self.data)-1
         else:
-            print "the rotor is not large enough to rotate"
-            pass
-        
+            print "We don't know which way to turn"
+            #TODO: Throw exception 
+
     def setStart(self, position):
         #Takes starting position from 0 to n on the Rotor
         #TODO: figure out why self.current isn't updating with updated position
@@ -59,7 +68,7 @@ class Core(object):
             cipher[i] = ord(cipher[i])
 
             if cipher[i] is 32:
-		        cipher[i] = chr(cipher[i])
+                cipher[i] = chr(cipher[i])
                 self.iterate(True)
 
             elif cipher[i] > 64 and cipher[i] < 91:
@@ -127,15 +136,11 @@ class Core(object):
         return output
     
     def iterate(self, logic):
-        if logic is True:
-        #TODO: make the nth Rotor rotate modulo the n+1th
-            pass
-        elif logic is False:
-        #TODO: make the n-1th Rotor rotate modulo the nth
-            pass
-        else:
-        #TODO: throw an exception
-            pass
+        self.r3.rotate(logic)
+        if self.r3.POSITION == 0:
+            self.r2.rotate(logic)
+            if self.r2.POSITION == 0:
+                self.r1.rotate(logic)
 
 #-------------------------------------------------------------------------------------------
 
