@@ -31,10 +31,10 @@ class TestRotorMethods(unittest.TestCase):
         R1 = Rotor(self.c1)
         R2 = Rotor(self.c2)
         R3 = Rotor(self.c3)
-             
-        R1.setStart(0)
-        R2.setStart(0)
-        R3.setStart(0)
+
+        R1.POSITION = 0
+        R2.POSITION = 0
+        R3.POSITION = 0
          
         R1.rotate(False)
         self.assertEqual(R1.POSITION, 2)
@@ -42,9 +42,8 @@ class TestRotorMethods(unittest.TestCase):
         for i in range(0,100):
             R2.rotate(True)
             
-        self.assertEqual(R2.POSITION, 0)
-        
-        #TODO: Determine how we'd like to handle modulo positions 
+        self.assertEqual(R2.POSITION, 1)
+
         R3.rotate(False)
         self.assertEqual(R3.POSITION, 0, 'It should rotate and remain 0')
     
@@ -56,10 +55,10 @@ class TestRotorMethods(unittest.TestCase):
         P1 = 0
         P2 = 1
         P3 = 35
-         
-        R1.setStart(P1)
-        R2.setStart(P2)
-        R3.setStart(P3)
+
+        R1.POSITION = P1
+        R2.POSITION = P2
+        R3.POSITION = P3
          
         self.assertEqual(R1.POSITION, P1, 'incorrect position')
         self.assertEqual(R2.POSITION, P2, 'incorrect position')

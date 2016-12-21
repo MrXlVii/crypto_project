@@ -4,22 +4,29 @@ class Rotor(object):
     def __init__(self, data):
         self.data = data
         self.POSITION = 0   #current position on Rotor
-
-#HAVENT RUN TESTS ON NEW PROPERTY ADDITIONS
+        self.current = None
 
     @property
     def current(self):
-        return self.current
+        return self._current
 
     @current.setter
-    def current(self, position):
-        self.current = self.data[self.POSITION] 
-        
+    def current(self, current):
+        self._current = self.data[self.POSITION] 
+    
+    @property
+    def POSITION(self):
+        return self._POSITION
+
+    @POSITION.setter
+    def POSITION(self, POSITION):
+        self._POSITION = POSITION
+    
     def rotate(self, logic):
         if logic is True:
             if len(self.data) != None:
                 self.POSITION += 1
-                if self.POSITON == len(self.data):
+                if self.POSITION == len(self.data):
                     self.POSITION = 0            
             else:
                 print "There is no Rotor object to rotate"
@@ -27,16 +34,10 @@ class Rotor(object):
             if len(self.data) != None:
                 self.POSITION -=1
                 if self.POSITION < 0:
-                   self.POSITON = len(self.data)-1
+                   self.POSITION = len(self.data)-1
         else:
             print "We don't know which way to turn"
-            #TODO: Throw exception 
-
-    def setStart(self, position):
-        #Takes starting position from 0 to n on the Rotor
-        #TODO: figure out why self.current isn't updating with updated position
-        self.POSITION = position
-        
+            #TODO: Throw exception   
         
 #---------------------------------------------------------------------------------------------
 
@@ -54,9 +55,9 @@ class Core(object):
         self.r2 = second
         self.r3 = third
         
-        self.r1.setStart(p1)
-        self.r2.setStart(p2)
-        self.r3.setStart(p3)
+        self.r1.POSITION = p1
+        self.r2.POSITION = p2
+        self.r3.POSITION = p3
         
     def encrypt(self, plain):
         #TODO: work out the modulo math
