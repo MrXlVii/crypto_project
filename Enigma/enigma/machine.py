@@ -12,29 +12,38 @@ class Rotor(object):
 
     @current.setter
     def current(self, current):
-        self._current = self.data[self.POSITION] 
-    
+        self._current = self.data[self.POSITION]
+
     @property
     def POSITION(self):
         return self._POSITION
 
     @POSITION.setter
     def POSITION(self, POSITION):
-        self._POSITION = POSITION
+        if POSITION >= len(self.data):
+            POSITION = POSITION % len(self.data)
+            self._POSITION = POSITION
+            self._current = self.data[self.POSITION]
+        elif POSITION < 0:
+            POSITION = len(self.data)-1
+            self._POSITION = POSITION
+            self._current = self.data[self.POSITION]
+
+        else:
+            self._POSITION = POSITION
+            self._current = self.data[self.POSITION]
     
     def rotate(self, logic):
         if logic is True:
             if len(self.data) != None:
                 self.POSITION += 1
-                if self.POSITION == len(self.data):
-                    self.POSITION = 0            
             else:
                 print "There is no Rotor object to rotate"
         elif logic is False:
             if len(self.data) != None:
                 self.POSITION -=1
-                if self.POSITION < 0:
-                   self.POSITION = len(self.data)-1
+            else:
+               print "There is no Rotor object to rotate"
         else:
             print "We don't know which way to turn"
             #TODO: Throw exception   

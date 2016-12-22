@@ -39,7 +39,7 @@ class TestRotorMethods(unittest.TestCase):
         R1.rotate(False)
         self.assertEqual(R1.POSITION, 2)
          
-        for i in range(0,100):
+        for i in range(100):
             R2.rotate(True)
             
         self.assertEqual(R2.POSITION, 1)
@@ -58,11 +58,9 @@ class TestRotorMethods(unittest.TestCase):
 
         R1.POSITION = P1
         R2.POSITION = P2
-        R3.POSITION = P3
-         
+
         self.assertEqual(R1.POSITION, P1, 'incorrect position')
         self.assertEqual(R2.POSITION, P2, 'incorrect position')
-        self.assertEqual(R3.POSITION, P3, 'does not account for modulo--optional')
 
 class TestCoreMethods(unittest.TestCase):
     #Test for Core object
@@ -94,6 +92,9 @@ class TestCoreMethods(unittest.TestCase):
         print core.r1.current
         print core.r2.current
         print core.r3.current
+        print core.r1.POSITION
+        print core.r2.POSITION
+        print core.r3.POSITION
 
         self.assertEqual(core.r1.current, 'C', 'failed to assign first rotor')
         self.assertEqual(core.r2.current, 'E', 'failed to assign second rotor')
