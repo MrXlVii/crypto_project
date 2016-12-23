@@ -24,7 +24,6 @@ Projects:
                     -Methods:
                         a. init(self, data) - constructor
                         b. rotate(self) - moves the Rotor one position
-                        c. setStart(self, position) - sets the starting position for each rotor
                 *Core.py*
                     -Central hub for the logic of the Enigma Machine, in charge of encrypt/decrypt as well as rotor settings
                     -Methods:
@@ -33,6 +32,7 @@ Projects:
                             -arrages the order of the individual Rotors and their positions
                         c. encrypt(self, plain) - runs the encryption process
                         d. decrypt(self, cipher) - runs decryption process
+                        e. iterate(self, logic) - input bool to determine which direct the rotor's rotate.
 
         
         
