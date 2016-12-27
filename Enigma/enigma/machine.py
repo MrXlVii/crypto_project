@@ -82,7 +82,8 @@ class Core(object):
                 self.iterate(True)
 
             elif cipher[i] > 64 and cipher[i] < 91:
-                temp = (cipher[i] + ord(r1.current) + ord(r2.current) + ord(r3.current)) % 64 
+                temp = (cipher[i] + ord(self.r1.current) + ord(self.r2.current) + ord(self.r3.current)) % 64
+                temp += 64
 		        #flag here for potential math error
                 if temp >= 91:
                     temp -= 90
@@ -93,7 +94,8 @@ class Core(object):
                 self.iterate(True)
 
             elif cipher[i] > 96 and cipher[i] < 123:
-                temp = (cipher[i] + ord(r1.current) + ord(r2.current) + ord(r3.current)) % 96
+                temp = (cipher[i] + ord(self.r1.current) + ord(self.r2.current) + ord(self.r3.current)) % 96
+                temp += 96
                 #flag for potential math error
                 if temp >= 123:
                     temp -= 122

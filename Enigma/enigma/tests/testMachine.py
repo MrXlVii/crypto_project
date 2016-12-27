@@ -106,7 +106,18 @@ class TestCoreMethods(unittest.TestCase):
         self.assertEqual(core.r3.current, 'D', 'failed rotor reassignment')
              
     def test_Encrypt(self):
-        pass
+        x1 = ['A', 'B', 'C', 'D','E', 'F', 'G', 'H', 'I', 'J']
+        x3 = x2 = x1
+        
+        R1 = Rotor(x1)
+        R2 = Rotor(x2)
+        R3 = Rotor(x3)
+
+        core = Core(R1, R2, R3)
+
+        temp = core.encrypt("HELLO WORLD")
+        print temp
+        self.assertEqual(temp, "temporary pre-math")
     
     def test_Decrypt(self):
         pass
