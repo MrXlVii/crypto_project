@@ -107,7 +107,8 @@ class TestCoreMethods(unittest.TestCase):
              
     def test_Encrypt(self):
         x1 = ['A', 'B', 'C', 'D','E', 'F', 'G', 'H', 'I', 'J']
-        x3 = x2 = x1
+        x2 = ['A', 'B', 'C', 'D','E', 'F', 'G', 'H', 'I', 'J']
+        x3 = ['A', 'B', 'C', 'D','E', 'F', 'G', 'H', 'I', 'J']
         
         R1 = Rotor(x1)
         R2 = Rotor(x2)
@@ -115,9 +116,9 @@ class TestCoreMethods(unittest.TestCase):
 
         core = Core(R1, R2, R3)
 
-        temp = core.encrypt("HELLO WORLD")
-        print temp
+        temp = core.encrypt("ABC")
         self.assertEqual(temp, "temporary pre-math")
+        
     
     def test_Decrypt(self):
         pass

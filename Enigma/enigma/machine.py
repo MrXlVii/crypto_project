@@ -72,8 +72,7 @@ class Core(object):
         #TODO: work out the modulo math
 
         cipher = list(plain)
-        tick = 0
-                
+
         for i in range(len(cipher)):
             cipher[i] = ord(cipher[i])
 
@@ -82,8 +81,8 @@ class Core(object):
                 self.iterate(True)
 
             elif cipher[i] > 64 and cipher[i] < 91:
-                temp = (cipher[i] + ord(self.r1.current) + ord(self.r2.current) + ord(self.r3.current)) % 64
-                temp += 64
+                temp = (cipher[i] + ord(self.r1.current) + ord(self.r2.current) + ord(self.r3.current)) % 65
+                temp += 65
 		        #flag here for potential math error
                 if temp >= 91:
                     temp -= 90
@@ -91,11 +90,12 @@ class Core(object):
                     cipher[i] = chr(temp)
                 else:
                     cipher[i] = chr(temp)
+
                 self.iterate(True)
 
             elif cipher[i] > 96 and cipher[i] < 123:
-                temp = (cipher[i] + ord(self.r1.current) + ord(self.r2.current) + ord(self.r3.current)) % 96
-                temp += 96
+                temp = (cipher[i] + ord(self.r1.current) + ord(self.r2.current) + ord(self.r3.current)) % 97
+                temp += 97
                 #flag for potential math error
                 if temp >= 123:
                     temp -= 122
