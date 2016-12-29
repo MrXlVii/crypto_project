@@ -116,15 +116,18 @@ class Core(object):
     def decrypt(self, cipher):
         #TODO: work out the modulo math
         
-        plain = list(ciphertext)
+        plain = list(cipher)
         
         for i in range(len(plain)):
             plain[i] = ord(plain[i])
 
         if plain[i] is 32:
             plain[i] = chr(plain[i])
+            self.iterate(False)
+
         elif plain[i] > 64 and plain[i] < 91:
-            temp = (plain[i] - ord(r1.current) - ord(r2.current) - ord(r3.current)) % 64
+            temp = (plain[i] - ord(self.r1.current) - ord(self.r2.current) - ord(self.r3.current)) % 65
+            temp += 65
             #Flagged for potential modulo error
             if temp <= 64:
                 temp += 26
@@ -132,17 +135,21 @@ class Core(object):
             else:
                 plain[i] = chr(temp)
 
+            self.iterate(False)
         elif plain[i] > 96 and plain[i] < 123:
-            temp = (plain[i] - ord(r1.current) - ord(r2.current) - ord(r3.current)) % 96
+            temp = (plain[i] - ord(self.r1.current) - ord(self.r2.current) - ord(self.r3.current)) % 97
+            temp += 97
             #Flagged for potential modulo error
             if temp <= 96:
                 temp += 26
                 plain[i] = chr(temp)
             else:
                 plain[i] = chr(temp)
+            self.iterate(False)
 
         else:
             plain[i] = chr(plain[i])
+            self.iterate(False)
 
         output= ''.join(plain)
         return output
