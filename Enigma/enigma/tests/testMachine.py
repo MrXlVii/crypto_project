@@ -106,9 +106,9 @@ class TestCoreMethods(unittest.TestCase):
         self.assertEqual(core.r3.current, 'D', 'failed rotor reassignment')
              
     def test_Encrypt(self):
-        x1 = ['A', 'B', 'C', 'D','E', 'F', 'G', 'H', 'I', 'J']
-        x2 = ['A', 'B', 'C', 'D','E', 'F', 'G', 'H', 'I', 'J']
-        x3 = ['A', 'B', 'C', 'D','E', 'F', 'G', 'H', 'I', 'J']
+        x1 = ['A', 'B', 'C']  #changed to A-B-C bc hand tests are difficult to solve for with A-...-J
+        x2 = ['A', 'B', 'C']
+        x3 = ['A', 'B', 'C']
         
         R1 = Rotor(x1)
         R2 = Rotor(x2)
@@ -116,23 +116,32 @@ class TestCoreMethods(unittest.TestCase):
 
         core = Core(R1, R2, R3)
 
-        temp = core.encrypt("ABC")
-        self.assertEqual(temp, "ACE")
+        temp = core.encrypt('ABC')
+        self.assertEqual(temp, 'ACE')
+
+        core.config(R1, R2, R3, 0, 0, 0)
+        temp2 = core.encrypt('HELLO WORLD')
+        self.assertEqual(temp2, 'HFNMQ YRVMF')
         
     
     def test_Decrypt(self):
-        x1 = ['A', 'B', 'C', 'D','E', 'F', 'G', 'H', 'I', 'J']
-        x2 = ['A', 'B', 'C', 'D','E', 'F', 'G', 'H', 'I', 'J']
-        x3 = ['A', 'B', 'C', 'D','E', 'F', 'G', 'H', 'I', 'J']
+        x1 = ['A', 'B', 'C']
+        x2 = ['A', 'B', 'C']
+        x3 = ['A', 'B', 'C']
         
         R1 = Rotor(x1)
         R2 = Rotor(x2)
         R3 = Rotor(x3)
 
         core = Core(R1, R2, R3)
+        core.config(R1, R2, R3, 0, 0, 0)
 
         temp = core.decrypt("ACE")
         self.assertEqual(temp, "ABC")
+
+        core.config(R1, R2, R3, 0, 0, 0)
+        temp2 = core.decrypt('HFNMQ YRVMF')
+        self.assertEqual(temp2, 'HELLO WORLD')
     
 
 if __name__ == "__main__":

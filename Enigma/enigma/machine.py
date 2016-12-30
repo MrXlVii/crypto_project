@@ -121,35 +121,35 @@ class Core(object):
         for i in range(len(plain)):
             plain[i] = ord(plain[i])
 
-        if plain[i] is 32:
-            plain[i] = chr(plain[i])
-            self.iterate(False)
+            if plain[i] is 32:
+                plain[i] = chr(plain[i])
+                self.iterate(True)
 
-        elif plain[i] > 64 and plain[i] < 91:
-            temp = (plain[i] - ord(self.r1.current) - ord(self.r2.current) - ord(self.r3.current)) % 65
-            temp += 65
+            elif plain[i] > 64 and plain[i] < 91:
+                temp = (plain[i] - ord(self.r1.current) - ord(self.r2.current) - ord(self.r3.current)) % 26
+                temp += 65
             #Flagged for potential modulo error
-            if temp <= 64:
-                temp += 26
-                plain[i] = chr(temp)
-            else:
-                plain[i] = chr(temp)
+                if temp <= 64:
+                    temp += 26
+                    plain[i] = chr(temp)
+                else:
+                    plain[i] = chr(temp)
 
-            self.iterate(False)
-        elif plain[i] > 96 and plain[i] < 123:
-            temp = (plain[i] - ord(self.r1.current) - ord(self.r2.current) - ord(self.r3.current)) % 97
-            temp += 97
-            #Flagged for potential modulo error
-            if temp <= 96:
-                temp += 26
-                plain[i] = chr(temp)
-            else:
-                plain[i] = chr(temp)
-            self.iterate(False)
+                self.iterate(True)
+            elif plain[i] > 96 and plain[i] < 123:
+                temp = (plain[i] - ord(self.r1.current) - ord(self.r2.current) - ord(self.r3.current)) % 26
+                temp += 97
+                #Flagged for potential modulo error
+                if temp <= 96:
+                    temp += 26
+                    plain[i] = chr(temp)
+                else:
+                    plain[i] = chr(temp)
+                self.iterate(True)
 
-        else:
-            plain[i] = chr(plain[i])
-            self.iterate(False)
+            else:
+                plain[i] = chr(plain[i])
+                self.iterate(True)
 
         output= ''.join(plain)
         return output
