@@ -36,15 +36,15 @@ class TestRotorMethods(unittest.TestCase):
         R2.POSITION = 0
         R3.POSITION = 0
          
-        R1.rotate(False)
-        self.assertEqual(R1.POSITION, 2)
+        R1.rotate()
+        self.assertEqual(R1.POSITION, 1)
          
         for i in range(100):
-            R2.rotate(True)
+            R2.rotate()
             
         self.assertEqual(R2.POSITION, 1)
 
-        R3.rotate(False)
+        R3.rotate()
         self.assertEqual(R3.POSITION, 0, 'It should rotate and remain 0')
     
     def test_SetStart(self):

@@ -33,20 +33,11 @@ class Rotor(object):
             self._POSITION = POSITION
             self._current = self.data[self.POSITION]
     
-    def rotate(self, logic):
-        if logic is True:
-            if len(self.data) != None:
-                self.POSITION += 1
-            else:
-                print "There is no Rotor object to rotate"
-        elif logic is False:
-            if len(self.data) != None:
-                self.POSITION -=1
-            else:
-               print "There is no Rotor object to rotate"
+    def rotate(self):
+        if len(self.data) != None:
+            self.POSITION += 1
         else:
-            print "We don't know which way to turn"
-            #TODO: Throw exception   
+            print "There is no Rotor object to rotate"
         
 #---------------------------------------------------------------------------------------------
 
@@ -69,7 +60,6 @@ class Core(object):
         self.r3.POSITION = p3
         
     def encrypt(self, plain):
-        #TODO: work out the modulo math
 
         cipher = list(plain)
 
@@ -78,12 +68,11 @@ class Core(object):
 
             if cipher[i] is 32:
                 cipher[i] = chr(cipher[i])
-                self.iterate(True)
+                self.iterate()
 
             elif cipher[i] > 64 and cipher[i] < 91:
                 temp = (cipher[i] + ord(self.r1.current) + ord(self.r2.current) + ord(self.r3.current)) % 65
                 temp += 65
-		        #flag here for potential math error
                 if temp >= 91:
                     temp -= 90
                     temp += 64
@@ -91,12 +80,11 @@ class Core(object):
                 else:
                     cipher[i] = chr(temp)
 
-                self.iterate(True)
+                self.iterate()
 
             elif cipher[i] > 96 and cipher[i] < 123:
                 temp = (cipher[i] + ord(self.r1.current) + ord(self.r2.current) + ord(self.r3.current)) % 97
                 temp += 97
-                #flag for potential math error
                 if temp >= 123:
                     temp -= 122
                     temp += 96
@@ -104,17 +92,16 @@ class Core(object):
                 else:
                     cipher[i] = chr(temp)
 
-                self.iterate(True)
+                self.iterate()
 
             else:
                 cipher[i] = chr(cipher[i])
-                self.iterate(True)
+                self.iterate()
 
         output = ''.join(cipher)
         return output
         
     def decrypt(self, cipher):
-        #TODO: work out the modulo math
         
         plain = list(cipher)
         
@@ -123,43 +110,41 @@ class Core(object):
 
             if plain[i] is 32:
                 plain[i] = chr(plain[i])
-                self.iterate(True)
+                self.iterate()
 
             elif plain[i] > 64 and plain[i] < 91:
                 temp = (plain[i] - ord(self.r1.current) - ord(self.r2.current) - ord(self.r3.current)) % 26
                 temp += 65
-            #Flagged for potential modulo error
                 if temp <= 64:
                     temp += 26
                     plain[i] = chr(temp)
                 else:
                     plain[i] = chr(temp)
 
-                self.iterate(True)
+                self.iterate()
             elif plain[i] > 96 and plain[i] < 123:
                 temp = (plain[i] - ord(self.r1.current) - ord(self.r2.current) - ord(self.r3.current)) % 26
                 temp += 97
-                #Flagged for potential modulo error
                 if temp <= 96:
                     temp += 26
                     plain[i] = chr(temp)
                 else:
                     plain[i] = chr(temp)
-                self.iterate(True)
+                self.iterate()
 
             else:
                 plain[i] = chr(plain[i])
-                self.iterate(True)
+                self.iterate()
 
         output= ''.join(plain)
         return output
     
-    def iterate(self, logic):
-        self.r3.rotate(logic)
+    def iterate(self):
+        self.r3.rotate()
         if self.r3.POSITION == 0:
-            self.r2.rotate(logic)
+            self.r2.rotate()
             if self.r2.POSITION == 0:
-                self.r1.rotate(logic)
+                self.r1.rotate()
 
 #-------------------------------------------------------------------------------------------
 

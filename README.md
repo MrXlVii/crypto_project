@@ -32,7 +32,7 @@ Projects:
                             -arrages the order of the individual Rotors and their positions
                         c. encrypt(self, plain) - runs the encryption process
                         d. decrypt(self, cipher) - runs decryption process
-                        e. iterate(self, logic) - input bool to determine which direct the rotor's rotate.
+                        e. iterate(self) - rotates the rotor objects.
 
         
         
