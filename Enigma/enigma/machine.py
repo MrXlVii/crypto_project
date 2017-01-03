@@ -1,3 +1,7 @@
+import Tkinter as Tk
+from Tkinter import * 
+
+
 class Rotor(object):
     """Basic Rotor class for Enigma Machine"""
 
@@ -148,22 +152,27 @@ class Core(object):
 
 #-------------------------------------------------------------------------------------------
 
-"""
-This is initialization for the rotor objects
+def main:
+    #TODO: write GUI for the main method
+    pass
 
+"""
 This is the letter arrange from the 1930 Enigma I
 
 """
 
 R1 = Rotor(['E', 'K', 'M', 'F', 'L', 'G', 'D', 'Q', 'V', 'Z', 'N', 'T', 'O', 'W', 'Y', 'H', 'X', 'U', 'S', 'P', 'A', 'I', 'B', 'R', 'C', 'J'])
 R2 = Rotor(['A', 'J', 'D', 'K', 'S', 'I', 'R', 'U', 'X', 'B', 'L', 'H', 'W', 'T', 'M', 'C', 'Q', 'G', 'Z', 'N', 'P', 'Y', 'F', 'V', 'O', 'E'])
-R3 = Rotor(['B', 'D', 'F', 'H', 'J', 'L', 'C', 'P', 'R', 'T', 'X', 'V', 'Z', 'N', 'Y', 'E', 'I', 'W', 'G', 'A', 'K', 'M', 'U', 'S', 'Q', 'O']) 	
+R3 = Rotor(['B', 'D', 'F', 'H', 'J', 'L', 'C', 'P', 'R', 'T', 'X', 'V', 'Z', 'N', 'Y', 'E', 'I', 'W', 'G', 'A', 'K', 'M', 'U', 'S', 'Q', 'O'])
+    
+class Machine:
+    def __init__(self, master):
+        frame = Frame(master)
+        frame.pack()
 
-#-------------------------------------------------------------------------------------------
-def main():
-    #TODO: write main method
-    pass
-
+root = Tk()
+machine = Machine(root)
+root.mainloop()
 
 if __name__ == "__main___":
     main()
