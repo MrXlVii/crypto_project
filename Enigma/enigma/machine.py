@@ -157,7 +157,7 @@ def main:
     pass
 
 """
-This is the letter arrange from the 1930 Enigma I
+This is the letter arrangement from the 1930 Enigma I
 
 """
 
@@ -169,6 +169,27 @@ class Machine:
     def __init__(self, master):
         frame = Frame(master)
         frame.pack()
+
+        self.enBut = Button(frame, text = 'Encrypt', fg = 'black', command = self.enBut)
+        self.enBut.pack(side = LEFT)
+        self.deBut = Button(frame, text = 'Decrypt', fg = 'black', command = self.deBut)
+        self.deBut.pack(side = RIGHT)
+
+    def enBut(self):
+        pass
+
+    def deBut(self):
+        pass
+        
+
+
+#TODO: step 2, Ask for rotor settings, i.e. configuration and position (possibly use buttons)
+    #Use 
+#TODO: step 1, Welcome, encrypt or decrypt
+    #Use two buttons
+#TODO: step 3. Ask for message input
+    #Use text entry
+#TODO: step 4, display output
 
 root = Tk()
 machine = Machine(root)
