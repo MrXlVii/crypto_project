@@ -20,11 +20,11 @@ Projects:
         FILES:
             1. Machine.py
                 -Primary module, contains all of the following classes
-                *Rotor.py*
+                *Rotor*
                     -Methods:
                         a. init(self, data) - constructor
                         b. rotate(self) - moves the Rotor one position
-                *Core.py*
+                *Core*
                     -Central hub for the logic of the Enigma Machine, in charge of encrypt/decrypt as well as rotor settings
                     -Methods:
                         a. init(self, first, second, third) -- constructor takes in three Rotors for initialization
@@ -33,6 +33,15 @@ Projects:
                         c. encrypt(self, plain) - runs the encryption process
                         d. decrypt(self, cipher) - runs decryption process
                         e. iterate(self) - rotates the rotor objects.
+                 *App*
+                     -GUI for the Enigma machine, progresses in four stages
+                     -Stages:
+                         a. Welcomes, asks for Rotor configuration (I-II-III, I-III-II, II-I-III, II-III-I, III-I-II, or III-II-I)
+                         b. Asks for position for each rotor (0-25)
+                         c. Asks whether the user wishes to encrypt or decrypt
+                         d. Asks the user to input the plaintext/ciphertext
+                         e. Returns the appropriate text
+                         
 
         
         
