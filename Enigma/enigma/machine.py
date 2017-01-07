@@ -152,34 +152,76 @@ class Core(object):
 
 #-------------------------------------------------------------------------------------------
 
-def main:
-    #TODO: write GUI for the main method
-    pass
-
 """
 This is the letter arrangement from the 1930 Enigma I
 
 """
 
-R1 = Rotor(['E', 'K', 'M', 'F', 'L', 'G', 'D', 'Q', 'V', 'Z', 'N', 'T', 'O', 'W', 'Y', 'H', 'X', 'U', 'S', 'P', 'A', 'I', 'B', 'R', 'C', 'J'])
-R2 = Rotor(['A', 'J', 'D', 'K', 'S', 'I', 'R', 'U', 'X', 'B', 'L', 'H', 'W', 'T', 'M', 'C', 'Q', 'G', 'Z', 'N', 'P', 'Y', 'F', 'V', 'O', 'E'])
-R3 = Rotor(['B', 'D', 'F', 'H', 'J', 'L', 'C', 'P', 'R', 'T', 'X', 'V', 'Z', 'N', 'Y', 'E', 'I', 'W', 'G', 'A', 'K', 'M', 'U', 'S', 'Q', 'O'])
-    
 class Machine:
+
+    R1 = Rotor(['E', 'K', 'M', 'F', 'L', 'G', 'D', 'Q', 'V', 'Z', 'N', 'T', 'O', 'W', 'Y', 'H', 'X', 'U', 'S', 'P', 'A', 'I', 'B', 'R', 'C', 'J'])
+    R2 = Rotor(['A', 'J', 'D', 'K', 'S', 'I', 'R', 'U', 'X', 'B', 'L', 'H', 'W', 'T', 'M', 'C', 'Q', 'G', 'Z', 'N', 'P', 'Y', 'F', 'V', 'O', 'E'])
+    R3 = Rotor(['B', 'D', 'F', 'H', 'J', 'L', 'C', 'P', 'R', 'T', 'X', 'V', 'Z', 'N', 'Y', 'E', 'I', 'W', 'G', 'A', 'K', 'M', 'U', 'S', 'Q', 'O'])
+
     def __init__(self, master):
         frame = Frame(master)
         frame.pack()
 
+        greeting = Label(master, text = 'Welcome, would you like to encrypt or decrypt a message?')
+        greeting.pack()
         self.enBut = Button(frame, text = 'Encrypt', fg = 'black', command = self.enBut)
         self.enBut.pack(side = LEFT)
         self.deBut = Button(frame, text = 'Decrypt', fg = 'black', command = self.deBut)
         self.deBut.pack(side = RIGHT)
 
     def enBut(self):
-        pass
+        
+        q1 = Label(master, text = 'Which rotor configuration are you using?')
+        q1.pack()
+        listbox = Listbox(master)
+        listbox.pack()
+
+        for item in ['I-II-III', 'I-III-II', 'II-I-III', 'II-III-I', 'III-I-II', 'III-II-I']:
+            listbox.insert(END, item)
+
+        q2 = Label(master, text = 'Which position will each rotor be set to?')
+        q2.pack()
+        lb1 = Listbox(master)
+        lb2 = Listbox(master)
+        lb3 = Listbox(master)
+        lb1.pack()
+        lb2.pack()
+        lb3.pack()
+
+        #TODO: determine how to prompt user for position
+
+        e = Entry(master)
+        e.pack()
+        
 
     def deBut(self):
-        pass
+
+        q1 = Label(master, text = 'Which rotor configuration are you using?')
+        q1.pack()
+        listbox = Listbox(master)
+        listbox.pack()
+
+        for item in ['I-II-III', 'I-III-II', 'II-I-III', 'II-III-I', 'III-I-II', 'III-II-I']:
+            listbox.insert(END, item)
+
+        q2 = Label(master, text = 'Which position will each rotor be set to?')
+        q2.pack()
+        lb1 = Listbox(master)
+        lb2 = Listbox(master)
+        lb3 = Listbox(master)
+        lb1.pack()
+        lb2.pack()
+        lb3.pack()
+
+        #TODO: determine how to prompt user for position
+        
+        e = Entry(master)
+        e.pack()
         
 
 
