@@ -167,8 +167,9 @@ class Machine:
         frame = Frame(master)
         frame.pack()
 
-        greeting = Label(master, text = 'Welcome, would you like to encrypt or decrypt a message?')
-        greeting.pack()
+        greeting = Message(frame, text = 'Welcome, would you like to encrypt or decrypt a message?')
+        greeting.pack(side = TOP)
+
         self.enBut = Button(frame, text = 'Encrypt', fg = 'black', command = self.enBut)
         self.enBut.pack(side = LEFT)
         self.deBut = Button(frame, text = 'Decrypt', fg = 'black', command = self.deBut)
@@ -176,53 +177,68 @@ class Machine:
 
     def enBut(self):
         
-        q1 = Label(master, text = 'Which rotor configuration are you using?')
+        q1 = Label(text = 'Which rotor configuration are you using?')
         q1.pack()
-        listbox = Listbox(master)
+        listbox = Listbox(selectmode = SINGLE)
         listbox.pack()
 
         for item in ['I-II-III', 'I-III-II', 'II-I-III', 'II-III-I', 'III-I-II', 'III-II-I']:
             listbox.insert(END, item)
 
-        q2 = Label(master, text = 'Which position will each rotor be set to?')
+        listbox.bind("<Double-Button-1>") #determine what to bind to
+
+        q2 = Label(text = 'Which position will each rotor be set to?')
         q2.pack()
-        lb1 = Listbox(master)
-        lb2 = Listbox(master)
-        lb3 = Listbox(master)
+        lb1 = Listbox(selectmode = SINGLE)
+        lb2 = Listbox(selectmode = SINGLE)
+        lb3 = Listbox(selectmode = SINGLE)
         lb1.pack()
         lb2.pack()
         lb3.pack()
+        
 
-        #TODO: determine how to prompt user for position
+        for item in ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25']:
+            lb1.insert(END, item)
+            lb2.insert(END, item)
+            lb3.insert(END, item)
 
-        e = Entry(master)
+        lb1.bind() #Figure out what to bind to
+        lb2.bind()
+        lb3.bind()
+
+        e = Entry()
         e.pack()
         
 
     def deBut(self):
 
-        q1 = Label(master, text = 'Which rotor configuration are you using?')
+        q1 = Label(text = 'Which rotor configuration are you using?')
         q1.pack()
-        listbox = Listbox(master)
+        listbox = Listbox()
         listbox.pack()
 
         for item in ['I-II-III', 'I-III-II', 'II-I-III', 'II-III-I', 'III-I-II', 'III-II-I']:
             listbox.insert(END, item)
 
-        q2 = Label(master, text = 'Which position will each rotor be set to?')
+        q2 = Label(text = 'Which position will each rotor be set to?')
         q2.pack()
-        lb1 = Listbox(master)
-        lb2 = Listbox(master)
-        lb3 = Listbox(master)
+        lb1 = Listbox(selectmode = SINGLE)
+        lb2 = Listbox(selectmode = SINGLE)
+        lb3 = Listbox(selectmode = SINGLE)
         lb1.pack()
         lb2.pack()
         lb3.pack()
 
-        #TODO: determine how to prompt user for position
-        
-        e = Entry(master)
+        for item in ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25']:
+            lb1.insert(END, item)
+            lb2.insert(END, item)
+            lb3.insert(END, item)
+
+        e = Entry()
         e.pack()
         
+    def output(self):
+        pass
 
 
 #TODO: step 2, Ask for rotor settings, i.e. configuration and position (possibly use buttons)
