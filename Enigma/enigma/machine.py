@@ -159,24 +159,14 @@ This is the letter arrangement from the 1930 Enigma I
 
 class Machine:
 
-    R1 = Rotor(['E', 'K', 'M', 'F', 'L', 'G', 'D', 'Q', 'V', 'Z', 'N', 'T', 'O', 'W', 'Y', 'H', 'X', 'U', 'S', 'P', 'A', 'I', 'B', 'R', 'C', 'J'])
-    R2 = Rotor(['A', 'J', 'D', 'K', 'S', 'I', 'R', 'U', 'X', 'B', 'L', 'H', 'W', 'T', 'M', 'C', 'Q', 'G', 'Z', 'N', 'P', 'Y', 'F', 'V', 'O', 'E'])
-    R3 = Rotor(['B', 'D', 'F', 'H', 'J', 'L', 'C', 'P', 'R', 'T', 'X', 'V', 'Z', 'N', 'Y', 'E', 'I', 'W', 'G', 'A', 'K', 'M', 'U', 'S', 'Q', 'O'])
-
     def __init__(self, master):
         frame = Frame(master)
         frame.pack()
 
-        greeting = Message(frame, text = 'Welcome, would you like to encrypt or decrypt a message?')
-        greeting.pack(side = TOP)
+        self.R1 = Rotor(['E', 'K', 'M', 'F', 'L', 'G', 'D', 'Q', 'V', 'Z', 'N', 'T', 'O', 'W', 'Y', 'H', 'X', 'U', 'S', 'P', 'A', 'I', 'B', 'R', 'C', 'J'])
+        self.R2 = Rotor(['A', 'J', 'D', 'K', 'S', 'I', 'R', 'U', 'X', 'B', 'L', 'H', 'W', 'T', 'M', 'C', 'Q', 'G', 'Z', 'N', 'P', 'Y', 'F', 'V', 'O', 'E'])
+        self.R3 = Rotor(['B', 'D', 'F', 'H', 'J', 'L', 'C', 'P', 'R', 'T', 'X', 'V', 'Z', 'N', 'Y', 'E', 'I', 'W', 'G', 'A', 'K', 'M', 'U', 'S', 'Q', 'O'])        
 
-        self.enBut = Button(frame, text = 'Encrypt', fg = 'black', command = self.enBut)
-        self.enBut.pack(side = LEFT)
-        self.deBut = Button(frame, text = 'Decrypt', fg = 'black', command = self.deBut)
-        self.deBut.pack(side = RIGHT)
-
-    def enBut(self):
-        
         q1 = Label(text = 'Which rotor configuration are you using?')
         q1.pack()
         listbox = Listbox(selectmode = SINGLE)
@@ -186,6 +176,9 @@ class Machine:
             listbox.insert(END, item)
 
         listbox.bind("<Double-Button-1>") #determine what to bind to
+
+        rotorCon = { 0: Core(R1, R2, R3), 1: Core(R1, R3, R2), 2: Core(R2, R1, R3), 3: Core(R2, R3, R1), 4: Core(R3, R1, R2), 5: Core(R3, R2, R1)}
+        core = rotorCon[#selection from button]
 
         q2 = Label(text = 'Which position will each rotor be set to?')
         q2.pack()
@@ -205,38 +198,28 @@ class Machine:
         lb1.bind() #Figure out what to bind to
         lb2.bind()
         lb3.bind()
+        
+        #TODO: Button that records the selections above
+        confirm = Button(text = 'Confirm', command = self.messageInput)
+        confirm.pack()
+
+    def messageInput(self):
+
+        greeting = Label(text = 'Would you like to encrypt or decrypt this message?')
+        greeting.pack(side = TOP)
 
         e = Entry()
         e.pack()
-        
 
+        self.enBut = Button(text = 'Encrypt', fg = 'black', command = self.enBut)
+        self.enBut.pack()
+        self.deBut = Button(text = 'Decrypt', fg = 'black', command = self.deBut)
+        self.deBut.pack()
+
+    def enBut(self):
+        pass
     def deBut(self):
-
-        q1 = Label(text = 'Which rotor configuration are you using?')
-        q1.pack()
-        listbox = Listbox()
-        listbox.pack()
-
-        for item in ['I-II-III', 'I-III-II', 'II-I-III', 'II-III-I', 'III-I-II', 'III-II-I']:
-            listbox.insert(END, item)
-
-        q2 = Label(text = 'Which position will each rotor be set to?')
-        q2.pack()
-        lb1 = Listbox(selectmode = SINGLE)
-        lb2 = Listbox(selectmode = SINGLE)
-        lb3 = Listbox(selectmode = SINGLE)
-        lb1.pack()
-        lb2.pack()
-        lb3.pack()
-
-        for item in ['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25']:
-            lb1.insert(END, item)
-            lb2.insert(END, item)
-            lb3.insert(END, item)
-
-        e = Entry()
-        e.pack()
-        
+        pass    
     def output(self):
         pass
 
