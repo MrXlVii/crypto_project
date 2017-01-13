@@ -200,10 +200,10 @@ class Machine:
         lb3.bind()
         
         #TODO: Button that records the selections above
-        confirm = Button(text = 'Confirm', command = self.messageInput)
+        confirm = Button(text = 'Confirm', command = lambda: messageInput(core, p1, p2, p3))
         confirm.pack()
 
-    def messageInput(self):
+    def messageInput(self, core, p1, p2, p3):
 
         greeting = Label(text = 'Would you like to encrypt or decrypt this message?')
         greeting.pack(side = TOP)
@@ -211,18 +211,20 @@ class Machine:
         e = Entry()
         e.pack()
 
-        self.enBut = Button(text = 'Encrypt', fg = 'black', command = self.enBut)
+        self.enBut = Button(text = 'Encrypt', fg = 'black', command = lambda: enBut(core, e.get()))
         self.enBut.pack()
-        self.deBut = Button(text = 'Decrypt', fg = 'black', command = self.deBut)
+        self.deBut = Button(text = 'Decrypt', fg = 'black', command = lambda: deBut(core, e.get()))
         self.deBut.pack()
 
-    def enBut(self):
-        pass
-    def deBut(self):
-        pass    
-    def output(self):
-        pass
-
+    def enBut(self, core, plain):
+        #TODO: determine how to get input for this method
+        cipher = core.encrypt(plain)
+        output = Label(text = cipher)
+        
+    def deBut(self, core, cipher):
+        #TODO: determine how to get input for this method
+        plain = core.decrypt(cipher)
+        output = Label(text = plain)
 
 #TODO: step 2, Ask for rotor settings, i.e. configuration and position (possibly use buttons)
     #Use 
