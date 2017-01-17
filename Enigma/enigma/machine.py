@@ -64,7 +64,6 @@ class Core(object):
         self.r3.POSITION = p3
         
     def encrypt(self, plain):
-        #TODO: Determine what to do with lowercase
         cipher = list(plain)
 
         for i in range(len(cipher)):
@@ -87,11 +86,12 @@ class Core(object):
                 self.iterate()
 
             elif cipher[i] > 96 and cipher[i] < 123:
-                temp = (cipher[i] + ord(self.r1.current) + ord(self.r2.current) + ord(self.r3.current)) % 97
-                temp += 97
-                if temp >= 123:
-                    temp -= 122
-                    temp += 96
+                cipher[i] -= 32 #changes lowercase to uppercase to keep with Enigma-style output
+                temp = (cipher[i] + ord(self.r1.current) + ord(self.r2.current) + ord(self.r3.current)) % 65
+                temp += 65
+                if temp >= 91:
+                    temp -= 90
+                    temp += 64
                     cipher[i] = chr(temp)
                 else:
                     cipher[i] = chr(temp)
@@ -106,7 +106,6 @@ class Core(object):
         return output
         
     def decrypt(self, cipher):
-        #TODO: Determine what to do with lowercase
         plain = list(cipher)
         
         for i in range(len(plain)):
@@ -127,9 +126,10 @@ class Core(object):
 
                 self.iterate()
             elif plain[i] > 96 and plain[i] < 123:
+                plain[i] -= 32 #changes lowercase input to uppercase to keep with Enigma-style output
                 temp = (plain[i] - ord(self.r1.current) - ord(self.r2.current) - ord(self.r3.current)) % 26
-                temp += 97
-                if temp <= 96:
+                temp += 65
+                if temp <= 64:
                     temp += 26
                     plain[i] = chr(temp)
                 else:
