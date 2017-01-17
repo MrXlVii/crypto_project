@@ -175,10 +175,10 @@ class Machine:
         for item in ['I-II-III', 'I-III-II', 'II-I-III', 'II-III-I', 'III-I-II', 'III-II-I']:
             listbox.insert(END, item)
 
-        listbox.bind("<Double-Button-1>") #determine what to bind to
+        listbox.bind('<<ListboxSelect>>') #determine what to bind to
 
         rotorCon = { 0: Core(R1, R2, R3), 1: Core(R1, R3, R2), 2: Core(R2, R1, R3), 3: Core(R2, R3, R1), 4: Core(R3, R1, R2), 5: Core(R3, R2, R1)}
-        core = rotorCon[listbox.curselection()] #needs to be changed
+        core = rotorCon.get(listbox.curselection())
 
         q2 = Label(text = 'Which position will each rotor be set to?')
         q2.pack()
@@ -195,19 +195,20 @@ class Machine:
             lb2.insert(END, item)
             lb3.insert(END, item)
 
-        lb1.bind() #Figure out what to bind to
-        lb2.bind()
-        lb3.bind()
+        lb1.bind('<<ListboxSelect>>') #Figure out what to bind to
+        lb2.bind('<<ListboxSelect>>')
+        lb3.bind('<<ListboxSelect>>')
         
         p1 = lb1.curselection()
         p2 = lb2.curselection()
         p3 = lb3.curselection()
 
-        confirm = Button(text = 'Confirm', command = lambda: messageInput(core, p1, p2, p3))
+        confirm = Button(text = 'Confirm', command = lambda: self.messageInput(core, p1, p2, p3))
         confirm.pack()
 
     def messageInput(self, core, p1, p2, p3):
         #TODO: kill previous frame, reveal only entry box
+        #TODO: provide functionality to encrypt/decrypt buttons
 
         greeting = Label(text = 'Would you like to encrypt or decrypt this message?')
         greeting.pack(side = TOP)
@@ -215,10 +216,10 @@ class Machine:
         e = Entry()
         e.pack()
 
-        self.enBut = Button(text = 'Encrypt', fg = 'black', command = lambda: enBut(core, e.get()))
-        self.enBut.pack()
-        self.deBut = Button(text = 'Decrypt', fg = 'black', command = lambda: deBut(core, e.get()))
-        self.deBut.pack()
+        encryptButton = Button(text = 'Encrypt', fg = 'black', command = lambda: self.enBut(core, e.get()))
+        encryptButton.pack()
+        decryptButton = Button(text = 'Decrypt', fg = 'black', command = lambda: self.deBut(core, e.get()))
+        decryptButton.pack()
 
     def enBut(self, core, plain):
         cipher = core.encrypt(plain)
