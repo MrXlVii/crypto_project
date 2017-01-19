@@ -36,11 +36,13 @@ Projects:
                  *App*
                      -GUI for the Enigma machine, progresses in four stages
                      -Stages:
-                         a. Welcomes, asks for Rotor configuration (I-II-III, I-III-II, II-I-III, II-III-I, III-I-II, or III-II-I)
-                         b. Asks for position for each rotor (0-25)
-                         c. Asks whether the user wishes to encrypt or decrypt
-                         d. Asks the user to input the plaintext/ciphertext
-                         e. Returns the appropriate text
+                         a. Welcomes, prompts to begin or quit
+                         b. Asks for Rotor configuration (I-II-III, I-III-II, II-I-III, II-III-I, III-I-II, or III-II-I)
+                         c. Asks for position for each rotor (0-25)
+                         d. Asks whether the user wishes to encrypt or decrypt
+                         e. Asks the user to input the plaintext/ciphertext
+                         f. Returns the appropriate text
+                         g. prompts to continue the program with the rotor settings, different settings, or to quit
                          
 
         
