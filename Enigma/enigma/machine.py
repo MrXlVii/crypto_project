@@ -3,11 +3,11 @@ from Tkinter import *
 
 
 class Rotor(object):
-    """Basic Rotor class for Enigma Machine"""
+    """Basic Rotor class for Enigma Machine."""
 
     def __init__(self, data):
         self.data = data
-        self.POSITION = 0   #current position on Rotor
+        self.POSITION = 0   #Current position on Rotor
         self.current = None
 
     @property
@@ -41,7 +41,7 @@ class Rotor(object):
         if len(self.data) != None:
             self.POSITION += 1
         else:
-            print "There is no Rotor object to rotate"
+            print "There is no Rotor object to rotate."
         
 #---------------------------------------------------------------------------------------------
 
@@ -53,7 +53,7 @@ class Core(object):
         self.r3 = third
 
     def config(self, first, second, third, p1, p2, p3):
-        #sets the current rotor configuration and positions of each respective rotor
+        #Sets the current rotor configuration and positions of each respective Rotor.
         
         self.r1 = first
         self.r2 = second
@@ -86,7 +86,7 @@ class Core(object):
                 self.iterate()
 
             elif cipher[i] > 96 and cipher[i] < 123:
-                cipher[i] -= 32 #changes lowercase to uppercase to keep with Enigma-style output
+                cipher[i] -= 32 #Changes lowercase to uppercase to keep with Enigma-style output.
                 temp = (cipher[i] + ord(self.r1.current) + ord(self.r2.current) + ord(self.r3.current)) % 65
                 temp += 65
                 if temp >= 91:
@@ -126,7 +126,7 @@ class Core(object):
 
                 self.iterate()
             elif plain[i] > 96 and plain[i] < 123:
-                plain[i] -= 32 #changes lowercase input to uppercase to keep with Enigma-style output
+                plain[i] -= 32 #Changes lowercase input to uppercase to keep with Enigma-style output.
                 temp = (plain[i] - ord(self.r1.current) - ord(self.r2.current) - ord(self.r3.current)) % 26
                 temp += 65
                 if temp <= 64:
@@ -153,11 +153,19 @@ class Core(object):
 #-------------------------------------------------------------------------------------------
 
 """
-This is the letter arrangement from the 1930 Enigma I
+This is the letter arrangement from the 1930 Enigma I.
 
 """
 
 class Machine:
+
+#TODO: Step 1: Welcomes, prompts to begin or quit.
+#TODO: Step 2: Ask for Rotor configuration (I-II-III, I-III-II, II-I-III, II-III-I, III-I-II, or III-II-I).
+#TODO: Step 3: Ask for position for each rotor (0-25).
+#TODO: Step 4: Ask whether the user wishes to encrypt or decrypt.
+#TODO: Step 5: Ask the user to input the plaintext/ciphertext.
+#TODO: Step 6: Returns the appropriate text.
+#TODO: Step 7: Prompts to continue the program with the rotor settings, different settings, or to quit.
 
     def __init__(self, master):
         frame = Frame(master)
@@ -175,11 +183,10 @@ class Machine:
         for item in ['I-II-III', 'I-III-II', 'II-I-III', 'II-III-I', 'III-I-II', 'III-II-I']:
             listbox.insert(END, item)
 
-        listbox.bind('<<ListboxSelect>>', self.onlbclick) #determine what to bind to
-
+        listbox.bind('<<ListboxSelect>>', self.onlbclick) #TODO: Determine what to properly bind to.
         rotorCon = { 0: Core(R1, R2, R3), 1: Core(R1, R3, R2), 2: Core(R2, R1, R3), 3: Core(R2, R3, R1), 4: Core(R3, R1, R2), 5: Core(R3, R2, R1)}
         
-        core = rotorCon.get(listbox.curselection())
+        core = rotorCon.get(listbox.curselection()) #TODO: Figure out why the Core doesn't initialize here.
 
         q2 = Label(text = 'Which position will each rotor be set to?')
         q2.pack()
@@ -196,7 +203,7 @@ class Machine:
             lb2.insert(END, item)
             lb3.insert(END, item)
 
-        lb1.bind('<<ListboxSelect>>', self.onlbclick) #Figure out what to bind to
+        lb1.bind('<<ListboxSelect>>', self.onlbclick) #TODO: Determine what to properly bind to.
         lb2.bind('<<ListboxSelect>>', self.onlbclick)
         lb3.bind('<<ListboxSelect>>', self.onlbclick)
         
@@ -208,8 +215,8 @@ class Machine:
         confirm.pack()
 
     def messageInput(self, core, p1, p2, p3):
-        #TODO: kill previous frame, reveal only entry box
-        #TODO: provide functionality to encrypt/decrypt buttons
+        #TODO: Kill previous frame, reveal only entry box.
+        #TODO: Provide functionality to the encrypt/decrypt buttons.
         greeting = Label(text = 'Would you like to encrypt or decrypt this message?')
         greeting.pack(side = TOP)
 
@@ -230,19 +237,11 @@ class Machine:
         output = Label(text = plain)
 
     def onlbclick(self, evt):
-        #Method for debugging purposes
+        #Method for debugging purposes.
         w = evt.widget
         index = int(w.curselection()[0])
         value = w.get(index)
         print index, value
-
-#TODO: step 2, Ask for rotor settings, i.e. configuration and position (possibly use buttons)
-    #Use 
-#TODO: step 1, Welcome, encrypt or decrypt
-    #Use two buttons
-#TODO: step 3. Ask for message input
-    #Use text entry
-#TODO: step 4, display output
 
 root = Tk()
 machine = Machine(root)
