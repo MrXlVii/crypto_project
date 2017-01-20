@@ -175,9 +175,10 @@ class Machine:
         for item in ['I-II-III', 'I-III-II', 'II-I-III', 'II-III-I', 'III-I-II', 'III-II-I']:
             listbox.insert(END, item)
 
-        listbox.bind('<<ListboxSelect>>') #determine what to bind to
+        listbox.bind('<<ListboxSelect>>', self.onlbclick) #determine what to bind to
 
         rotorCon = { 0: Core(R1, R2, R3), 1: Core(R1, R3, R2), 2: Core(R2, R1, R3), 3: Core(R2, R3, R1), 4: Core(R3, R1, R2), 5: Core(R3, R2, R1)}
+        
         core = rotorCon.get(listbox.curselection())
 
         q2 = Label(text = 'Which position will each rotor be set to?')
@@ -195,9 +196,9 @@ class Machine:
             lb2.insert(END, item)
             lb3.insert(END, item)
 
-        lb1.bind('<<ListboxSelect>>') #Figure out what to bind to
-        lb2.bind('<<ListboxSelect>>')
-        lb3.bind('<<ListboxSelect>>')
+        lb1.bind('<<ListboxSelect>>', self.onlbclick) #Figure out what to bind to
+        lb2.bind('<<ListboxSelect>>', self.onlbclick)
+        lb3.bind('<<ListboxSelect>>', self.onlbclick)
         
         p1 = lb1.curselection()
         p2 = lb2.curselection()
@@ -209,7 +210,6 @@ class Machine:
     def messageInput(self, core, p1, p2, p3):
         #TODO: kill previous frame, reveal only entry box
         #TODO: provide functionality to encrypt/decrypt buttons
-
         greeting = Label(text = 'Would you like to encrypt or decrypt this message?')
         greeting.pack(side = TOP)
 
@@ -228,6 +228,13 @@ class Machine:
     def deBut(self, core, cipher):
         plain = core.decrypt(cipher)
         output = Label(text = plain)
+
+    def onlbclick(self, evt):
+        #Method for debugging purposes
+        w = evt.widget
+        index = int(w.curselection()[0])
+        value = w.get(index)
+        print index, value
 
 #TODO: step 2, Ask for rotor settings, i.e. configuration and position (possibly use buttons)
     #Use 
