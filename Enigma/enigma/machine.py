@@ -64,6 +64,7 @@ class Core(object):
         self.r3.POSITION = p3
         
     def encrypt(self, plain):
+        #TODO: determine why some symbols appear in cipher
         cipher = list(plain)
 
         for i in range(len(cipher)):
@@ -168,25 +169,24 @@ class Machine:
 #TODO: Step 7: Prompts to continue the program with the rotor settings, different settings, or to quit.
 
     def __init__(self, master):
+        self.master = master
+        self.core = None
+        self.R1 = Rotor(['E', 'K', 'M', 'F', 'L', 'G', 'D', 'Q', 'V', 'Z', 'N', 'T', 'O', 'W', 'Y', 'H', 'X', 'U', 'S', 'P', 'A', 'I', 'B', 'R', 'C', 'J'])
+        self.R2 = Rotor(['A', 'J', 'D', 'K', 'S', 'I', 'R', 'U', 'X', 'B', 'L', 'H', 'W', 'T', 'M', 'C', 'Q', 'G', 'Z', 'N', 'P', 'Y', 'F', 'V', 'O', 'E'])
+        self.R3 = Rotor(['B', 'D', 'F', 'H', 'J', 'L', 'C', 'P', 'R', 'T', 'X', 'V', 'Z', 'N', 'Y', 'E', 'I', 'W', 'G', 'A', 'K', 'M', 'U', 'S', 'Q', 'O'])
+
         frame = Frame(master)
-        frame.pack()
+        frame.pack()        
 
-        R1 = Rotor(['E', 'K', 'M', 'F', 'L', 'G', 'D', 'Q', 'V', 'Z', 'N', 'T', 'O', 'W', 'Y', 'H', 'X', 'U', 'S', 'P', 'A', 'I', 'B', 'R', 'C', 'J'])
-        R2 = Rotor(['A', 'J', 'D', 'K', 'S', 'I', 'R', 'U', 'X', 'B', 'L', 'H', 'W', 'T', 'M', 'C', 'Q', 'G', 'Z', 'N', 'P', 'Y', 'F', 'V', 'O', 'E'])
-        R3 = Rotor(['B', 'D', 'F', 'H', 'J', 'L', 'C', 'P', 'R', 'T', 'X', 'V', 'Z', 'N', 'Y', 'E', 'I', 'W', 'G', 'A', 'K', 'M', 'U', 'S', 'Q', 'O'])        
-
-        q1 = Label(text = 'Which rotor configuration are you using?')
+        q1 = Label(master, text = 'Which rotor configuration are you using?')
         q1.pack()
-        listbox = Listbox(selectmode = SINGLE)
+        listbox = Listbox(master, selectmode = SINGLE)
         listbox.pack()
 
         for item in ['I-II-III', 'I-III-II', 'II-I-III', 'II-III-I', 'III-I-II', 'III-II-I']:
             listbox.insert(END, item)
 
-        listbox.bind('<<ListboxSelect>>', self.onlbclick) #TODO: Determine what to properly bind to.
-        rotorCon = { 0: Core(R1, R2, R3), 1: Core(R1, R3, R2), 2: Core(R2, R1, R3), 3: Core(R2, R3, R1), 4: Core(R3, R1, R2), 5: Core(R3, R2, R1)}
-        
-        core = rotorCon.get(listbox.curselection()) #TODO: Figure out why the Core doesn't initialize here.
+        listbox.bind('<<ListboxSelect>>', self.onConfigClick) #TODO: Determine what to properly bind to.
 
         q2 = Label(text = 'Which position will each rotor be set to?')
         q2.pack()
@@ -203,18 +203,18 @@ class Machine:
             lb2.insert(END, item)
             lb3.insert(END, item)
 
-        lb1.bind('<<ListboxSelect>>', self.onlbclick) #TODO: Determine what to properly bind to.
-        lb2.bind('<<ListboxSelect>>', self.onlbclick)
-        lb3.bind('<<ListboxSelect>>', self.onlbclick)
+        lb1.bind('<<ListboxSelect>>', self.onRotorClick) #TODO: Determine what to properly bind to.
+        lb2.bind('<<ListboxSelect>>', self.onRotorClick)
+        lb3.bind('<<ListboxSelect>>', self.onRotorClick)
         
         p1 = lb1.curselection()
         p2 = lb2.curselection()
         p3 = lb3.curselection()
 
-        confirm = Button(text = 'Confirm', command = lambda: self.messageInput(core, p1, p2, p3))
+        confirm = Button(text = 'Confirm', command = lambda: self.messageInput(p1, p2, p3))
         confirm.pack()
 
-    def messageInput(self, core, p1, p2, p3):
+    def messageInput(self, p1, p2, p3):
         #TODO: Kill previous frame, reveal only entry box.
         #TODO: Provide functionality to the encrypt/decrypt buttons.
         greeting = Label(text = 'Would you like to encrypt or decrypt this message?')
@@ -223,21 +223,39 @@ class Machine:
         e = Entry()
         e.pack()
 
-        encryptButton = Button(text = 'Encrypt', fg = 'black', command = lambda: self.enBut(core, e.get()))
+        encryptButton = Button(text = 'Encrypt', fg = 'black', command = lambda: self.enBut(e.get()))
         encryptButton.pack()
-        decryptButton = Button(text = 'Decrypt', fg = 'black', command = lambda: self.deBut(core, e.get()))
+        decryptButton = Button(text = 'Decrypt', fg = 'black', command = lambda: self.deBut(e.get()))
         decryptButton.pack()
 
-    def enBut(self, core, plain):
-        cipher = core.encrypt(plain)
+    def enBut(self, plain):
+        cipher = self.core.encrypt(plain)
+        print cipher
         output = Label(text = cipher)
         
-    def deBut(self, core, cipher):
-        plain = core.decrypt(cipher)
+    def deBut(self, cipher):
+        plain = self.core.decrypt(cipher)
+        print plain
         output = Label(text = plain)
 
-    def onlbclick(self, evt):
-        #Method for debugging purposes.
+    def onConfigClick(self, evt):
+        w = evt.widget
+        index = int(w.curselection()[0])
+        value = w.get(index)
+        print index, value
+
+        rotorCon = { 
+            0: Core(self.R1, self.R2, self.R3),
+            1: Core(self.R1, self.R3, self.R2),
+            2: Core(self.R2, self.R1, self.R3),
+            3: Core(self.R2, self.R3, self.R1), 
+            4: Core(self.R3, self.R1, self.R2),
+            5: Core(self.R3, self.R2, self.R1)
+        }
+        self.core = rotorCon.get(index)
+        
+    def onRotorClick(self, evt, num):
+        #Solve rotor positioning
         w = evt.widget
         index = int(w.curselection()[0])
         value = w.get(index)
