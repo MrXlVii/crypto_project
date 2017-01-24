@@ -161,11 +161,11 @@ This is the letter arrangement from the 1930 Enigma I.
 class Machine:
 
 #TODO: Step 1: Welcomes, prompts to begin or quit.
-#TODO: Step 2: Ask for Rotor configuration (I-II-III, I-III-II, II-I-III, II-III-I, III-I-II, or III-II-I).
-#TODO: Step 3: Ask for position for each rotor (0-25).
-#TODO: Step 4: Ask whether the user wishes to encrypt or decrypt.
-#TODO: Step 5: Ask the user to input the plaintext/ciphertext.
-#TODO: Step 6: Returns the appropriate text.
+#Step 2: Ask for Rotor configuration (I-II-III, I-III-II, II-I-III, II-III-I, III-I-II, or III-II-I).
+#Step 3: Ask for position for each rotor (0-25).
+#Step 4: Ask whether the user wishes to encrypt or decrypt.
+#Step 5: Ask the user to input the plaintext/ciphertext.
+#TODO: Step 6: Returns the appropriate text. 
 #TODO: Step 7: Prompts to continue the program with the rotor settings, different settings, or to quit.
 
     def __init__(self, master):
@@ -186,7 +186,7 @@ class Machine:
         for item in ['I-II-III', 'I-III-II', 'II-I-III', 'II-III-I', 'III-I-II', 'III-II-I']:
             listbox.insert(END, item)
 
-        listbox.bind('<<ListboxSelect>>', self.onConfigClick) #TODO: Determine what to properly bind to.
+        listbox.bind('<<ListboxSelect>>', self.onConfigClick)
 
         q2 = Label(text = 'Which position will each rotor be set to?')
         q2.pack()
@@ -203,26 +203,22 @@ class Machine:
             lb2.insert(END, item)
             lb3.insert(END, item)
 
-        lb1.bind('<<ListboxSelect>>', self.onRotorClick) #TODO: Determine what to properly bind to.
-        lb2.bind('<<ListboxSelect>>', self.onRotorClick)
-        lb3.bind('<<ListboxSelect>>', self.onRotorClick)
-        
-        p1 = lb1.curselection()
-        p2 = lb2.curselection()
-        p3 = lb3.curselection()
+        lb1.bind('<<ListboxSelect>>', self.onP1Click)
+        lb2.bind('<<ListboxSelect>>', self.onP2Click)
+        lb3.bind('<<ListboxSelect>>', self.onP3Click)
 
-        confirm = Button(text = 'Confirm', command = lambda: self.messageInput(p1, p2, p3))
+        confirm = Button(text = 'Confirm', command = self.messageInput)
         confirm.pack()
 
-    def messageInput(self, p1, p2, p3):
+    def messageInput(self):
         #TODO: Kill previous frame, reveal only entry box.
-        #TODO: Provide functionality to the encrypt/decrypt buttons.
         greeting = Label(text = 'Would you like to encrypt or decrypt this message?')
         greeting.pack(side = TOP)
 
         e = Entry()
         e.pack()
 
+        #TODO: Create a frame for the (en/de)crypt buttons
         encryptButton = Button(text = 'Encrypt', fg = 'black', command = lambda: self.enBut(e.get()))
         encryptButton.pack()
         decryptButton = Button(text = 'Decrypt', fg = 'black', command = lambda: self.deBut(e.get()))
@@ -232,13 +228,16 @@ class Machine:
         cipher = self.core.encrypt(plain)
         print cipher
         output = Label(text = cipher)
+        output.pack()
         
     def deBut(self, cipher):
         plain = self.core.decrypt(cipher)
         print plain
         output = Label(text = plain)
+        output.pack()
 
     def onConfigClick(self, evt):
+        #Initializes the Core and Rotor configuration on click
         w = evt.widget
         index = int(w.curselection()[0])
         value = w.get(index)
@@ -254,12 +253,29 @@ class Machine:
         }
         self.core = rotorCon.get(index)
         
-    def onRotorClick(self, evt, num):
-        #Solve rotor positioning
+    def onP1Click(self, evt):
+        #Sets the first Rotor's position on click
         w = evt.widget
         index = int(w.curselection()[0])
         value = w.get(index)
         print index, value
+        self.core.r1.POSITION = index
+
+    def onP2Click(self, evt):
+        #Sets the second Rotor's position on click
+        w = evt.widget
+        index = int(w.curselection()[0])
+        value = w.get(index)
+        print index, value
+        self.core.r2.POSITION = index
+
+    def onP3Click(self, evt):
+        #Sets the third Rotor's position on click
+        w = evt.widget
+        index = int(w.curselection()[0])
+        value = w.get(index)
+        print index, value
+        self.core.r3.POSITION = index
 
 root = Tk()
 machine = Machine(root)
