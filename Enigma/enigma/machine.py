@@ -175,12 +175,14 @@ class Machine:
         self.R2 = Rotor(['A', 'J', 'D', 'K', 'S', 'I', 'R', 'U', 'X', 'B', 'L', 'H', 'W', 'T', 'M', 'C', 'Q', 'G', 'Z', 'N', 'P', 'Y', 'F', 'V', 'O', 'E'])
         self.R3 = Rotor(['B', 'D', 'F', 'H', 'J', 'L', 'C', 'P', 'R', 'T', 'X', 'V', 'Z', 'N', 'Y', 'E', 'I', 'W', 'G', 'A', 'K', 'M', 'U', 'S', 'Q', 'O'])
 
-        frame = Frame(master)
-        frame.pack()        
+        self.frame = Frame(master)
+        self.frame.pack()
+        self.sub = Frame(self.frame)
+        self.sub.pack()   
 
-        q1 = Label(master, text = 'Which rotor configuration are you using?')
+        q1 = Label(self.sub, text = 'Which rotor configuration are you using?')
         q1.pack()
-        listbox = Listbox(master, selectmode = SINGLE)
+        listbox = Listbox(self.sub, selectmode = SINGLE)
         listbox.pack()
 
         for item in ['I-II-III', 'I-III-II', 'II-I-III', 'II-III-I', 'III-I-II', 'III-II-I']:
@@ -188,11 +190,11 @@ class Machine:
 
         listbox.bind('<<ListboxSelect>>', self.onConfigClick)
 
-        q2 = Label(text = 'Which position will each rotor be set to?')
+        q2 = Label(self.sub, text = 'Which position will each rotor be set to?')
         q2.pack()
-        lb1 = Listbox(selectmode = SINGLE)
-        lb2 = Listbox(selectmode = SINGLE)
-        lb3 = Listbox(selectmode = SINGLE)
+        lb1 = Listbox(self.sub, selectmode = SINGLE)
+        lb2 = Listbox(self.sub, selectmode = SINGLE)
+        lb3 = Listbox(self.sub, selectmode = SINGLE)
         lb1.pack()
         lb2.pack()
         lb3.pack()
@@ -207,33 +209,44 @@ class Machine:
         lb2.bind('<<ListboxSelect>>', self.onP2Click)
         lb3.bind('<<ListboxSelect>>', self.onP3Click)
 
-        confirm = Button(text = 'Confirm', command = self.messageInput)
+        confirm = Button(self.sub, text = 'Confirm', command = self.messageInput)
         confirm.pack()
 
     def messageInput(self):
         #TODO: Kill previous frame, reveal only entry box.
-        greeting = Label(text = 'Would you like to encrypt or decrypt this message?')
+        self.sub.destroy()
+        self.sub2 = Frame(self.frame)
+        self.sub2.pack()
+        greeting = Label(self.sub2, text = 'Would you like to encrypt or decrypt this message?')
         greeting.pack(side = TOP)
 
-        e = Entry()
+        e = Entry(self.sub2)
         e.pack()
 
         #TODO: Create a frame for the (en/de)crypt buttons
-        encryptButton = Button(text = 'Encrypt', fg = 'black', command = lambda: self.enBut(e.get()))
+        encryptButton = Button(self.sub2, text = 'Encrypt', fg = 'black', command = lambda: self.enBut(e.get()))
         encryptButton.pack()
-        decryptButton = Button(text = 'Decrypt', fg = 'black', command = lambda: self.deBut(e.get()))
+        decryptButton = Button(self.sub2, text = 'Decrypt', fg = 'black', command = lambda: self.deBut(e.get()))
         decryptButton.pack()
 
     def enBut(self, plain):
         cipher = self.core.encrypt(plain)
         print cipher
-        output = Label(text = cipher)
+        self.sub2.destroy()
+        self.sub3 = Frame(self.frame)
+        self.sub3.pack()
+
+        #TODO: Make third frame presentable
+        output = Label(self.sub3, text = cipher)
         output.pack()
         
     def deBut(self, cipher):
         plain = self.core.decrypt(cipher)
         print plain
-        output = Label(text = plain)
+        self.sub2.destroy()
+        self.sub3 = Frame(self.frame)
+        self.sub3.pack()
+        output = Label(self.sub3, text = plain)
         output.pack()
 
     def onConfigClick(self, evt):
