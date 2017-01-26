@@ -177,9 +177,22 @@ class Machine:
 
         self.frame = Frame(master)
         self.frame.pack()
-        self.sub = Frame(self.frame)
-        self.sub.pack()   
 
+        self.welcome = Frame(self.frame)
+        self.welcome.pack()
+        hello = Label(self.welcome, text = 'Welcome to the Enigma Machine')
+        hello.pack()
+        start = Button(self.welcome, text = 'Begin', command = self.begin)
+        start.pack()
+        quit = Button(self.welcome, text = 'Quit', command = self.quit)
+        quit.pack()
+        
+
+    def begin(self):
+        self.welcome.destroy()
+
+        self.sub = Frame(self.frame)
+        self.sub.pack()
         q1 = Label(self.sub, text = 'Which rotor configuration are you using?')
         q1.pack()
         listbox = Listbox(self.sub, selectmode = SINGLE)
@@ -233,12 +246,21 @@ class Machine:
         cipher = self.core.encrypt(plain)
         print cipher
         self.sub2.destroy()
-        self.sub3 = Frame(self.frame)
+        self.sub3 = Frame()
         self.sub3.pack()
 
         #TODO: Make third frame presentable
+        message = Label(self.sub3, text = 'Your encrypted message is: ')
+        message.pack(side = TOP)
         output = Label(self.sub3, text = cipher)
         output.pack()
+        
+        contButton = Button(self.sub3, text = 'Continue with Same Settings', command = self.same)
+        contButton.pack()
+        diffButton = Button(self.sub3, text = 'Continue with Different Settings', command = self.different)
+        diffButton.pack()
+        quit = Button(self.sub3, text = 'Quit', command = self.quit)
+        quit.pack()
         
     def deBut(self, cipher):
         plain = self.core.decrypt(cipher)
@@ -246,6 +268,8 @@ class Machine:
         self.sub2.destroy()
         self.sub3 = Frame(self.frame)
         self.sub3.pack()
+        message = Label(self.sub3, text = 'Your decrypted message is: ')
+        message.pack(side = TOP)
         output = Label(self.sub3, text = plain)
         output.pack()
 
@@ -289,6 +313,21 @@ class Machine:
         value = w.get(index)
         print index, value
         self.core.r3.POSITION = index
+
+    def quit(self):
+        root.destroy()
+
+    def same(self):
+        #TODO: Pulls the last Core/rotor settings
+        self.sub3.destroy()
+        self.messageInput()
+        pass
+
+    def different(self):
+        #TODO: Starts program loop over
+        self.sub3.destroy()
+        self.begin()
+        pass
 
 root = Tk()
 machine = Machine(root)
