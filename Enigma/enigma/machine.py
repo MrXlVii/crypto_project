@@ -160,13 +160,13 @@ This is the letter arrangement from the 1930 Enigma I.
 
 class Machine:
 
-#TODO: Step 1: Welcomes, prompts to begin or quit.
+#Step 1: Welcomes, prompts to begin or quit.
 #Step 2: Ask for Rotor configuration (I-II-III, I-III-II, II-I-III, II-III-I, III-I-II, or III-II-I).
 #Step 3: Ask for position for each rotor (0-25).
 #Step 4: Ask whether the user wishes to encrypt or decrypt.
 #Step 5: Ask the user to input the plaintext/ciphertext.
 #TODO: Step 6: Returns the appropriate text. 
-#TODO: Step 7: Prompts to continue the program with the rotor settings, different settings, or to quit.
+#Step 7: Prompts to continue the program with the rotor settings, different settings, or to quit.
 
     def __init__(self, master):
         self.master = master
@@ -182,6 +182,9 @@ class Machine:
         self.welcome.pack()
         hello = Label(self.welcome, text = 'Welcome to the Enigma Machine')
         hello.pack()
+        #TODO: figure out PEP8 approprite styling for this string message
+        info = Label(self.welcome, text = 'This program is meant to simulate the 3-Rotor encryption scheme used by the Enigma 1 in WW2. \n Refer to the documentation to see where I deviated from the original design')
+        info.pack()
         start = Button(self.welcome, text = 'Begin', command = self.begin)
         start.pack()
         quit = Button(self.welcome, text = 'Quit', command = self.quit)
@@ -226,15 +229,17 @@ class Machine:
         confirm.pack()
 
     def messageInput(self):
-        #TODO: Kill previous frame, reveal only entry box.
         self.sub.destroy()
         self.sub2 = Frame(self.frame)
         self.sub2.pack()
-        greeting = Label(self.sub2, text = 'Would you like to encrypt or decrypt this message?')
+        greeting = Label(self.sub2, text = 'Please enter your message: ')
         greeting.pack(side = TOP)
 
         e = Entry(self.sub2)
         e.pack()
+
+        greeting2 = Label(self.sub2, text = 'Would you like to encrypt or decrypt this message? ')
+        greeting2.pack()
 
         #TODO: Create a frame for the (en/de)crypt buttons
         encryptButton = Button(self.sub2, text = 'Encrypt', fg = 'black', command = lambda: self.enBut(e.get()))
@@ -253,7 +258,7 @@ class Machine:
         message = Label(self.sub3, text = 'Your encrypted message is: ')
         message.pack(side = TOP)
         output = Label(self.sub3, text = cipher)
-        output.pack()
+        output.pack(side = TOP)
         
         contButton = Button(self.sub3, text = 'Continue with Same Settings', command = self.same)
         contButton.pack()
@@ -264,7 +269,7 @@ class Machine:
         
     def deBut(self, cipher):
         plain = self.core.decrypt(cipher)
-        print plain
+        print plain #for debugging purposes
         self.sub2.destroy()
         self.sub3 = Frame(self.frame)
         self.sub3.pack()
@@ -278,7 +283,7 @@ class Machine:
         w = evt.widget
         index = int(w.curselection()[0])
         value = w.get(index)
-        print index, value
+        print index, value #for debugging
 
         rotorCon = { 
             0: Core(self.R1, self.R2, self.R3),
@@ -293,41 +298,42 @@ class Machine:
     def onP1Click(self, evt):
         #Sets the first Rotor's position on click
         w = evt.widget
-        index = int(w.curselection()[0])
-        value = w.get(index)
-        print index, value
-        self.core.r1.POSITION = index
+        self.index1 = int(w.curselection()[0])
+        value = w.get(self.index1)
+        print self.index1, value
+        self.core.r1.POSITION = self.index1
 
     def onP2Click(self, evt):
         #Sets the second Rotor's position on click
         w = evt.widget
-        index = int(w.curselection()[0])
-        value = w.get(index)
-        print index, value
-        self.core.r2.POSITION = index
+        self.index2 = int(w.curselection()[0])
+        value = w.get(self.index2)
+        print self.index2, value
+        self.core.r2.POSITION = self.index2
 
     def onP3Click(self, evt):
         #Sets the third Rotor's position on click
         w = evt.widget
-        index = int(w.curselection()[0])
-        value = w.get(index)
-        print index, value
-        self.core.r3.POSITION = index
+        self.index3 = int(w.curselection()[0])
+        value = w.get(self.index3)
+        print self.index3, value
+        self.core.r3.POSITION = self.index3
 
     def quit(self):
         root.destroy()
 
     def same(self):
-        #TODO: Pulls the last Core/rotor settings
+        #Pulls the last Core/rotor settings, asks for message input
         self.sub3.destroy()
+        self.core.r1.POSITION = self.index1
+        self.core.r2.POSITION = self.index2
+        self.core.r3.POSITION = self.index3
         self.messageInput()
-        pass
 
     def different(self):
-        #TODO: Starts program loop over
+        #Starts program loop over
         self.sub3.destroy()
         self.begin()
-        pass
 
 root = Tk()
 machine = Machine(root)
