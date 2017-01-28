@@ -168,13 +168,21 @@ class Machine:
 #TODO: Step 6: Returns the appropriate text. 
 #Step 7: Prompts to continue the program with the rotor settings, different settings, or to quit.
 
+
+#TODO: Do final widget formatting with grids
+
     def __init__(self, master):
         self.master = master
         self.core = None
-        self.R1 = Rotor(['E', 'K', 'M', 'F', 'L', 'G', 'D', 'Q', 'V', 'Z', 'N', 'T', 'O', 'W', 'Y', 'H', 'X', 'U', 'S', 'P', 'A', 'I', 'B', 'R', 'C', 'J'])
-        self.R2 = Rotor(['A', 'J', 'D', 'K', 'S', 'I', 'R', 'U', 'X', 'B', 'L', 'H', 'W', 'T', 'M', 'C', 'Q', 'G', 'Z', 'N', 'P', 'Y', 'F', 'V', 'O', 'E'])
-        self.R3 = Rotor(['B', 'D', 'F', 'H', 'J', 'L', 'C', 'P', 'R', 'T', 'X', 'V', 'Z', 'N', 'Y', 'E', 'I', 'W', 'G', 'A', 'K', 'M', 'U', 'S', 'Q', 'O'])
-
+        self.R1 = Rotor(
+            ['E', 'K', 'M', 'F', 'L', 'G', 'D', 'Q', 'V', 'Z', 'N', 'T', 'O', 'W', 'Y', 'H', 'X', 'U', 'S', 'P', 'A', 'I', 'B', 'R', 'C', 'J']
+        )
+        self.R2 = Rotor(
+            ['A', 'J', 'D', 'K', 'S', 'I', 'R', 'U', 'X', 'B', 'L', 'H', 'W', 'T', 'M', 'C', 'Q', 'G', 'Z', 'N', 'P', 'Y', 'F', 'V', 'O', 'E']
+        )
+        self.R3 = Rotor(
+            ['B', 'D', 'F', 'H', 'J', 'L', 'C', 'P', 'R', 'T', 'X', 'V', 'Z', 'N', 'Y', 'E', 'I', 'W', 'G', 'A', 'K', 'M', 'U', 'S', 'Q', 'O']
+        )
         self.frame = Frame(master)
         self.frame.pack()
 
@@ -182,8 +190,11 @@ class Machine:
         self.welcome.pack()
         hello = Label(self.welcome, text = 'Welcome to the Enigma Machine')
         hello.pack()
-        #TODO: figure out PEP8 approprite styling for this string message
-        info = Label(self.welcome, text = 'This program is meant to simulate the 3-Rotor encryption scheme used by the Enigma 1 in WW2. \n Refer to the documentation to see where I deviated from the original design')
+        info = Label(
+            self.welcome, 
+            text = 'This program is meant to simulate the 3-Rotor encryption scheme used by the Enigma 1 in WW2.' 
+            + '\n Refer to the documentation to see where I deviated from the original design'
+        )
         info.pack()
         start = Button(self.welcome, text = 'Begin', command = self.begin)
         start.pack()
@@ -251,7 +262,7 @@ class Machine:
         cipher = self.core.encrypt(plain)
         print cipher
         self.sub2.destroy()
-        self.sub3 = Frame()
+        self.sub3 = Frame(self.frame)
         self.sub3.pack()
 
         #TODO: Make third frame presentable
