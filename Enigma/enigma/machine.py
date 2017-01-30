@@ -64,7 +64,6 @@ class Core(object):
         self.r3.POSITION = p3
         
     def encrypt(self, plain):
-        #TODO: determine why some symbols appear in cipher
         cipher = list(plain)
 
         for i in range(len(cipher)):
@@ -75,7 +74,7 @@ class Core(object):
                 self.iterate()
 
             elif cipher[i] > 64 and cipher[i] < 91:
-                temp = (cipher[i] + ord(self.r1.current) + ord(self.r2.current) + ord(self.r3.current)) % 65
+                temp = (cipher[i] + ord(self.r1.current) + ord(self.r2.current) + ord(self.r3.current)) % 26
                 temp += 65
                 if temp >= 91:
                     temp -= 90
@@ -88,7 +87,7 @@ class Core(object):
 
             elif cipher[i] > 96 and cipher[i] < 123:
                 cipher[i] -= 32 #Changes lowercase to uppercase to keep with Enigma-style output.
-                temp = (cipher[i] + ord(self.r1.current) + ord(self.r2.current) + ord(self.r3.current)) % 65
+                temp = (cipher[i] + ord(self.r1.current) + ord(self.r2.current) + ord(self.r3.current)) % 26
                 temp += 65
                 if temp >= 91:
                     temp -= 90
@@ -165,7 +164,7 @@ class Machine:
 #Step 3: Ask for position for each rotor (0-25).
 #Step 4: Ask whether the user wishes to encrypt or decrypt.
 #Step 5: Ask the user to input the plaintext/ciphertext.
-#TODO: Step 6: Returns the appropriate text. 
+#Step 6: Returns the appropriate text. 
 #Step 7: Prompts to continue the program with the rotor settings, different settings, or to quit.
 
 
@@ -252,7 +251,6 @@ class Machine:
         greeting2 = Label(self.sub2, text = 'Would you like to encrypt or decrypt this message? ')
         greeting2.pack()
 
-        #TODO: Create a frame for the (en/de)crypt buttons
         encryptButton = Button(self.sub2, text = 'Encrypt', fg = 'black', command = lambda: self.enBut(e.get()))
         encryptButton.pack()
         decryptButton = Button(self.sub2, text = 'Decrypt', fg = 'black', command = lambda: self.deBut(e.get()))
@@ -265,7 +263,6 @@ class Machine:
         self.sub3 = Frame(self.frame)
         self.sub3.pack()
 
-        #TODO: Make third frame presentable
         message = Label(self.sub3, text = 'Your encrypted message is: ')
         message.pack(side = TOP)
         output = Label(self.sub3, text = cipher)
@@ -288,6 +285,13 @@ class Machine:
         message.pack(side = TOP)
         output = Label(self.sub3, text = plain)
         output.pack()
+
+        contButton = Button(self.sub3, text = 'Continue with Same Settings', command = self.same)
+        contButton.pack()
+        diffButton = Button(self.sub3, text = 'Continue with Different Settings', command = self.different)
+        diffButton.pack()
+        quit = Button(self.sub3, text = 'Quit', command = self.quit)
+        quit.pack()
 
     def onConfigClick(self, evt):
         #Initializes the Core and Rotor configuration on click
