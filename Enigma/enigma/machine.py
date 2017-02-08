@@ -1,5 +1,5 @@
 import Tkinter as Tk
-from Tk import *
+from Tkinter import *
 
 
 class Rotor(object):
@@ -217,7 +217,7 @@ class Machine:
             text='This program is meant to simulate ' +
                  'the 3-Rotor encryption scheme used by the Enigma 1 in WW2.' +
                  '\n Refer to the documentation' +
-                 '   to see where I deviated from the original design'
+                 ' to see where I deviated from the original design'
         )
         info.pack()
         start = Button(self.welcome, text='Begin', command=self.begin)
