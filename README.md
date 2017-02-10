@@ -41,7 +41,7 @@ Projects:
                         c. encrypt(self, plain) - runs the encryption process
                         d. decrypt(self, cipher) - runs decryption process
                         e. iterate(self) - rotates the rotor objects.
-                 *App*
+                 *App* (using TKinter)
                      -GUI for the Enigma machine, progresses in four stages
                      -Stages:
                          a. Welcomes, prompts to begin or quit
